@@ -5,12 +5,11 @@
     --table-row-text: #C8F7DC;
     --table-border: rgba(255,255,255,0.15);
     
-    /* ★ 특정 셀 색상 변수 추가 ★ */
+    /* 특정 셀 색상 변수 */
     --col-num-text-color: #FFC000;
-    --col-num-bg-color: transparent; /* 초기값은 투명 */
+    --col-num-bg-color: transparent; 
     --col-select-text-color: #00FFFF;
-    --col-select-bg-color: transparent; /* 초기값은 투명 */
-    --col-service-color: #FF0000; /* 매진 글자색 */
+    --col-select-bg-color: transparent; 
 }
 
 body{
@@ -122,22 +121,37 @@ body{
     border-bottom:1px solid var(--table-border);
 }
 
-/* ★ 특정 셀 스타일 적용 (배경색/글자색 분리) ★ */
+/* ★ 특정 셀 스타일 적용 (매진 글자 개별 색상 적용) ★ */
 /* 1. 번호 (첫 번째 열) */
 .data-table tbody tr td:nth-child(1) {
     color: var(--col-num-text-color);
-    background: var(--col-num-bg-color); /* 배경색 적용 */
+    background: var(--col-num-bg-color); 
     font-weight: 700;
 }
 /* 2. 선택 유형 (두 번째 열) */
 .data-table tbody tr td:nth-child(2) {
     color: var(--col-select-text-color);
-    background: var(--col-select-bg-color); /* 배경색 적용 */
+    background: var(--col-select-bg-color); 
 }
-/* 3. 서비스 (마지막 열, '매진' 글자색만) */
-.data-table tbody tr td:last-child {
-    color: var(--col-service-color); /* 글자색만 변경 */
-    /* 배경색은 기본 배경색을 따름 */
+/* 3. 서비스 (마지막 열, '매진' 글자색 개별 적용) */
+/* row1의 '매진' 글자색 */
+.data-table tbody tr.row1 td:last-child {
+    color: #FF4500; /* 오렌지 레드 */
+    font-weight: 900;
+}
+/* row2의 '매진' 글자색 */
+.data-table tbody tr.row2 td:last-child {
+    color: #DA70D6; /* 연한 보라 */
+    font-weight: 900;
+}
+/* row3의 '매진' 글자색 */
+.data-table tbody tr.row3 td:last-child {
+    color: #00FF7F; /* 봄맞이 그린 */
+    font-weight: 900;
+}
+/* row4의 '매진' 글자색 */
+.data-table tbody tr.row4 td:last-child {
+    color: #4169E1; /* 로얄 블루 */
     font-weight: 900;
 }
 /* --------------------------------- */
