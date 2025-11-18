@@ -110,7 +110,11 @@ body{
     height:38px;
     padding:10px 8px;
     border-bottom:2px solid var(--table-border);
+    border-right: 1px solid var(--table-header-bg); /* 오른쪽 흰색 선을 덮기 위해 헤더 색상으로 덮음 */
     text-align:center;
+}
+.data-table th:last-child {
+    border-right: none; /* 마지막 헤더는 아예 오른쪽 경계선을 제거하여 깔끔하게 처리 */
 }
 
 /* 바디 셀 */
@@ -120,7 +124,13 @@ body{
     padding:10px 8px;
     text-align:center;
     border-bottom:1px solid var(--table-border);
+    /* 오른쪽 흰색 선을 덮기 위해 각 셀의 오른쪽 선을 배경색으로 설정 */
+    border-right: 1px solid var(--table-row-bg); 
 }
+.data-table td:last-child {
+    border-right: none; /* 마지막 셀은 아예 오른쪽 경계선을 제거하여 깔끔하게 처리 */
+}
+
 
 /* 특정 셀 스타일 적용 */
 /* 1. 번호 (첫 번째 열) */
@@ -177,13 +187,12 @@ body{
 .color-panel label{ display:flex; align-items:center; justify-content:space-between; gap:6px; white-space:nowrap; }
 .color-panel input[type=color]{ width:34px; height:22px; border:none; cursor:pointer; padding:0; }
 
-/* 컬러 팔레트 스타일 */
+/* 컬러 팔레트 스타일 (맨 위로 이동 후 스타일 조정) */
 .palette-section {
-    /* 팔레트가 맨 위로 갔으므로, 상단 구분선은 제거 */
     border-top: none;
     padding-top: 0;
     margin-top: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 하단 구분선 추가 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 하단 구분선만 유지 */
     padding-bottom: 10px;
     margin-bottom: 5px;
 }
