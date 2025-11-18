@@ -8,16 +8,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 컬러 입력 요소들 ID 매칭
+    // 일반 컬러 입력 요소 ID 매칭
     const headerBg = document.getElementById("headerBgColor");
     const headerText = document.getElementById("headerTextColor");
     const rowBg = document.getElementById("rowBgColor");
     const rowText = document.getElementById("rowTextColor");
 
-    // ★ 특정 셀 색상 컬러 입력 요소 ID 매칭 ★
-    const colNum = document.getElementById("colNumColor");
-    const colSelect = document.getElementById("colSelectColor");
-    const colService = document.getElementById("colServiceColor");
+    // ★ 특정 셀 색상 컬러 입력 요소 ID 매칭 (배경/글자 분리) ★
+    const colNumText = document.getElementById("colNumTextColor");
+    const colNumBg = document.getElementById("colNumBgColor");
+    const colSelectText = document.getElementById("colSelectTextColor");
+    const colSelectBg = document.getElementById("colSelectBgColor");
+    const colService = document.getElementById("colServiceColor"); // 매진 글자색
     // ----------------------------------------
 
     // 제목 입력 요소 ID 매칭
@@ -38,8 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (rowText) rowText.addEventListener("input", e => setVar('--table-row-text', e.target.value));
 
     // 2. ★ 특정 셀 색상 변경 이벤트 리스너 ★
-    if (colNum) colNum.addEventListener("input", e => setVar('--col-num-color', e.target.value));
-    if (colSelect) colSelect.addEventListener("input", e => setVar('--col-select-color', e.target.value));
+    // 번호 셀
+    if (colNumText) colNumText.addEventListener("input", e => setVar('--col-num-text-color', e.target.value));
+    if (colNumBg) colNumBg.addEventListener("input", e => setVar('--col-num-bg-color', e.target.value));
+    // 선택 유형 셀
+    if (colSelectText) colSelectText.addEventListener("input", e => setVar('--col-select-text-color', e.target.value));
+    if (colSelectBg) colSelectBg.addEventListener("input", e => setVar('--col-select-bg-color', e.target.value));
+    // 매진 글자
     if (colService) colService.addEventListener("input", e => setVar('--col-service-color', e.target.value));
 
     // 3. 제목 변경 이벤트 리스너
