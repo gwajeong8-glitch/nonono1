@@ -60,44 +60,44 @@
         </thead>
 
         <tbody>
-        <tr class="row1">
-            <td contenteditable="true">1</td>
-            <td contenteditable="true">선택 가능</td>
-            <td contenteditable="true">120,000</td>
-            <td contenteditable="true">250,000</td>
-            <td contenteditable="true">100%</td>
-            <td contenteditable="true">정상</td>
-            <td contenteditable="true">매진</td>
+        <tr>
+            <td class="num">1</td>
+            <td class="type">선택 가능</td>
+            <td>120,000</td>
+            <td>250,000</td>
+            <td>100%</td>
+            <td>정상</td>
+            <td class="sold">매진</td>
         </tr>
 
-        <tr class="row2">
-            <td contenteditable="true">2</td>
-            <td contenteditable="true">선택 가능</td>
-            <td contenteditable="true">230,000</td>
-            <td contenteditable="true">276,000</td>
-            <td contenteditable="true">100%</td>
-            <td contenteditable="true">정상</td>
-            <td contenteditable="true">매진</td>
+        <tr>
+            <td class="num">2</td>
+            <td class="type">선택 가능</td>
+            <td>230,000</td>
+            <td>276,000</td>
+            <td>100%</td>
+            <td>정상</td>
+            <td class="sold">매진</td>
         </tr>
 
-        <tr class="row3">
-            <td contenteditable="true">3</td>
-            <td contenteditable="true">선택 가능</td>
-            <td contenteditable="true">570,000</td>
-            <td contenteditable="true">584,000</td>
-            <td contenteditable="true">100%</td>
-            <td contenteditable="true">정상</td>
-            <td contenteditable="true">매진</td>
+        <tr>
+            <td class="num">3</td>
+            <td class="type">선택 가능</td>
+            <td>570,000</td>
+            <td>584,000</td>
+            <td>100%</td>
+            <td>정상</td>
+            <td class="sold">매진</td>
         </tr>
 
-        <tr class="row4">
-            <td contenteditable="true">4</td>
-            <td contenteditable="true">선택 가능</td>
-            <td contenteditable="true">730,000</td>
-            <td contenteditable="true">876,000</td>
-            <td contenteditable="true">100%</td>
-            <td contenteditable="true">정상</td>
-            <td contenteditable="true">매진</td>
+        <tr>
+            <td class="num">4</td>
+            <td class="type">선택 가능</td>
+            <td>730,000</td>
+            <td>876,000</td>
+            <td>100%</td>
+            <td>정상</td>
+            <td class="sold">매진</td>
         </tr>
         </tbody>
     </table>
@@ -111,18 +111,18 @@
 
 </div>
 
-<!-- ★ 표 색상 변경 UI (오른쪽 상단에 떠있음) -->
-<div class="color-panel" aria-hidden="false">
+<!-- 🔹 컬러 설정 패널 -->
+<div class="color-panel">
     <label>헤더 배경 <input type="color" id="headerBgColor" value="#2196F3"></label>
     <label>헤더 글자 <input type="color" id="headerTextColor" value="#ffffff"></label>
     <label>행 배경 <input type="color" id="rowBgColor" value="#1B5E20"></label>
     <label>행 글자 <input type="color" id="rowTextColor" value="#C8F7DC"></label>
+
+    <label>번호 색상 <input type="color" id="leftNumberColor" value="#ffffff"></label>
+    <label>유형 색상 <input type="color" id="typeSelectColor" value="#ffffff"></label>
+    <label>매진 색상 <input type="color" id="soldoutColor" value="#ff4444"></label>
 </div>
 
 <script src="script.js"></script>
 </body>
 </html>
-
-<label>번호 색상 <input type="color" id="leftNumberColor"></label>
-<label>유형 색상 <input type="color" id="typeSelectColor"></label>
-<label>매진 색상 <input type="color" id="soldoutColor"></label>
