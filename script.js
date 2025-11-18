@@ -14,12 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const rowBg = document.getElementById("rowBgColor");
     const rowText = document.getElementById("rowTextColor");
 
-    // ★ 특정 셀 색상 컬러 입력 요소 ID 매칭 (배경/글자 분리) ★
+    // ★ 특정 셀 색상 컬러 입력 요소 ID 매칭 ★
     const colNumText = document.getElementById("colNumTextColor");
     const colNumBg = document.getElementById("colNumBgColor");
     const colSelectText = document.getElementById("colSelectTextColor");
     const colSelectBg = document.getElementById("colSelectBgColor");
-    const colService = document.getElementById("colServiceColor"); // 매진 글자색
+    // (매진 글자 색상 컨트롤러는 CSS 고정으로 인해 제거됨)
     // ----------------------------------------
 
     // 제목 입력 요소 ID 매칭
@@ -46,8 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 선택 유형 셀
     if (colSelectText) colSelectText.addEventListener("input", e => setVar('--col-select-text-color', e.target.value));
     if (colSelectBg) colSelectBg.addEventListener("input", e => setVar('--col-select-bg-color', e.target.value));
-    // 매진 글자
-    if (colService) colService.addEventListener("input", e => setVar('--col-service-color', e.target.value));
+    // (매진은 CSS에 개별 색상으로 고정되어 JS 컨트롤러 없음)
 
     // 3. 제목 변경 이벤트 리스너
     if (titleInput && titleElement) {
