@@ -1,154 +1,128 @@
-:root {
-    --left-number-color: #ffffff;
-    --type-select-color: #ffffff;
-    --soldout-text-color: #ff4444;
-    --table-header-bg: #2196F3;
-    --table-header-text: #ffffff;
-    --table-row-bg: #1B5E20;
-    --table-row-text: #C8F7DC;
-    --table-border: rgba(255,255,255,0.15);
-}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>실시간 데이터 현황</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-body{
-    margin:0;
-    padding:0;
-    background:#000;
-    font-family:'Noto Sans KR',sans-serif;
-    color:white;
-}
+<div class="wrap">
 
-/* 래퍼 */
-.wrap{
-    width:1024px;
-    height:490px;
-    margin:0 auto;
-    position:relative;
-    background-image:url("vip.png");
-    background-size:cover;
-    background-position:center;
-}
+    <!-- 상단 탭 -->
+    <div class="top-menu">
+        <div class="menu">블레스 전국 프레스티지 서비스</div>
+        <div class="menu">VIP 회원 전용 통합 매니지먼트</div>
+        <div class="menu">노블레스 회원 전용룸</div>
+    </div>
 
-/* 상단 탭 */
-.top-menu{
-    position:absolute;
-    top:50px;
-    left:190px;
-    display:flex;
-    gap:20px;
-    z-index:5;
-}
-.top-menu .menu{
-    background:rgba(160,160,160,0.3);
-    padding:8px 15px;
-    border-radius:5px;
-    font-size:14px;
-}
+    <!-- 제목 -->
+    <div class="title">실시간 데이터 현황</div>
 
-/* 제목 / 서브 */
-.title{
-    position:absolute;
-    top:140px;
-    width:100%;
-    text-align:center;
-    font-size:28px;
-    font-weight:700;
-    z-index:5;
-}
-.subtitle{
-    position:absolute;
-    top:115px;
-    width:100%;
-    text-align:center;
-    transform:translateX(-5px);
-    font-size:14px;
-    color:#ffcc66;
-    z-index:5;
-}
+    <!-- 서브 문구 -->
+    <div class="subtitle">
+        당신의 취향을 공유하며, 뜨거운 교감을 나눌 은밀한 파트너.
+        은밀한 만남을 통해 최상의 만족감을 경험하세요.
+    </div>
 
-/* 왼쪽 메뉴 */
-.left-menu{
-    position:absolute;
-    left:50px;
-    top:160px;
-    width:115px;
-    line-height:16px;
-    font-size:13px;
-    z-index:5;
-}
-.left-item{
-    padding:1px 0;
-    cursor:pointer;
-    transition:0.15s;
-}
-.left-item.active{
-    color:#ffdd66;
-    font-weight:700;
-    text-shadow:0 0 6px #ffdd66;
-}
+    <!-- 왼쪽 메뉴 -->
+    <div class="left-menu">
+        <div class="left-item active">메인 화면</div>
+        <div class="left-item">[매칭/고객 상태]</div>
+        <div class="left-item">주문 상태</div>
+        <div class="left-item">인증 상태</div>
+        <div class="left-item">[상담/문의]</div>
+        <div class="left-item">직무 문의</div>
+        <div class="left-item">전국 만남</div>
+        <div class="left-item">[관리/데이터]</div>
+        <div class="left-item">실시간 데이터</div>
+        <div class="left-item">데이터 분석</div>
+        <div class="left-item">포인트 조회</div>
+        <div class="left-item">유흥 관리</div>
+        <div class="left-item">회원 관리</div>
+        <div class="left-item">회원 승인</div>
+        <div class="left-item">회원 탈퇴</div>
+        <div class="left-item">담당 실장</div>
+    </div>
 
-/* 표 (한 번만 정의) */
-.data-table{
-    position:absolute;
-    top:200px;     /* 이 값만 수정하면 표의 위치가 바뀝니다 */
-    left:160px;    /* 이 값만 수정하면 표의 좌우 위치가 바뀝니다 */
-    width:800px;
-    border-collapse:collapse;
-    font-size:15px;
-    z-index:4;
-    overflow:hidden;
-    box-shadow:0 2px 0 rgba(0,0,0,0.35);
-}
+    <!-- 표 -->
+    <table class="data-table">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>선택 유형</th>
+            <th>포인트 금액</th>
+            <th>환불 금액</th>
+            <th>정확도</th>
+            <th>데이터 상태</th>
+            <th>서비스</th>
+        </tr>
+        </thead>
 
-/* 헤더 */
-.data-table th{
-    background: var(--table-header-bg);
-    color: var(--table-header-text);
-    height:38px;
-    padding:10px 8px;
-    border-bottom:2px solid var(--table-border);
-    text-align:center;
-}
+        <tbody>
+        <tr>
+            <td class="num">1</td>
+            <td class="type">선택 가능</td>
+            <td>120,000</td>
+            <td>250,000</td>
+            <td>100%</td>
+            <td>정상</td>
+            <td class="sold">매진</td>
+        </tr>
 
-/* 바디 셀 */
-.data-table td{
-    background: var(--table-row-bg);
-    color: var(--table-row-text);
-    padding:10px 8px;
-    text-align:center;
-    border-bottom:1px solid var(--table-border);
-}
+        <tr>
+            <td class="num">2</td>
+            <td class="type">선택 가능</td>
+            <td>230,000</td>
+            <td>276,000</td>
+            <td>100%</td>
+            <td>정상</td>
+            <td class="sold">매진</td>
+        </tr>
 
-/* 호버 */
-.data-table tr:hover td{
-    background: rgba(255,255,255,0.05);
-}
+        <tr>
+            <td class="num">3</td>
+            <td class="type">선택 가능</td>
+            <td>570,000</td>
+            <td>584,000</td>
+            <td>100%</td>
+            <td>정상</td>
+            <td class="sold">매진</td>
+        </tr>
 
-/* 하단 안내 */
-.notice{
-    position:absolute;
-    bottom:45px;
-    left:180px;
-    right:150px;
-    font-size:11px;
-    color:#ffcc66;
-    line-height:1.5;
-    text-align:left;
-    z-index:5;
-}
+        <tr>
+            <td class="num">4</td>
+            <td class="type">선택 가능</td>
+            <td>730,000</td>
+            <td>876,000</td>
+            <td>100%</td>
+            <td>정상</td>
+            <td class="sold">매진</td>
+        </tr>
+        </tbody>
+    </table>
 
-/* 색상 패널 */
-.color-panel{
-    position:fixed;   /* fixed로 하면 화면 스크롤 있어도 보인다 */
-    top:60px;
-    right:20px;
-    background:rgba(0,0,0,0.55);
-    padding:8px 12px;
-    border-radius:6px;
-    font-size:12px;
-    color:#fff;
-    display:flex;
-    gap:10px;
-    z-index:10;
-}
-.color-panel label{ display:flex; align-items:center; gap:6px; white-space:nowrap; }
-.color-panel input[type=color]{ width:34px; height:22px; border:none; cursor:pointer; padding:0; }
+    <!-- 하단 안내문 -->
+    <div class="notice">
+        [중요 공지] 업무 진행 중 핵심 정보를 누락하는 일이 없도록 정보를 담당자의 지시에 따라 신중하게 처리하시기 바랍니다.
+        개별적인 업무 처리로 발생하는 모든 결과에 대한 책임은 당사자에게 귀속됩니다.
+        진행 상황은 시스템에 실시간으로 반영되오니, 항상 확인하여 주십시오.
+    </div>
+
+</div>
+
+<!-- 🔹 컬러 설정 패널 -->
+<div class="color-panel">
+    <label>헤더 배경 <input type="color" id="headerBgColor" value="#2196F3"></label>
+    <label>헤더 글자 <input type="color" id="headerTextColor" value="#ffffff"></label>
+    <label>행 배경 <input type="color" id="rowBgColor" value="#1B5E20"></label>
+    <label>행 글자 <input type="color" id="rowTextColor" value="#C8F7DC"></label>
+
+    <label>번호 색상 <input type="color" id="leftNumberColor" value="#ffffff"></label>
+    <label>유형 색상 <input type="color" id="typeSelectColor" value="#ffffff"></label>
+    <label>매진 색상 <input type="color" id="soldoutColor" value="#ff4444"></label>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
