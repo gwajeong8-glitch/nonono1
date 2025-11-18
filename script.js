@@ -29,3 +29,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (rowBg) rowBg.addEventListener("input", e => setVar('--table-row-bg', e.target.value));
     if (rowText) rowText.addEventListener("input", e => setVar('--table-row-text', e.target.value));
 });
+
+// 번호 색 변경
+document.getElementById("leftNumberColor").addEventListener("input", e => {
+    document.documentElement.style.setProperty('--left-number-color', e.target.value);
+});
+
+// 유형 색 변경
+document.getElementById("typeSelectColor").addEventListener("input", e => {
+    document.documentElement.style.setProperty('--type-select-color', e.target.value);
+});
+
+// 매진 색 변경
+document.getElementById("soldoutColor").addEventListener("input", e => {
+    document.documentElement.style.setProperty('--soldout-text-color', e.target.value);
+});
+
