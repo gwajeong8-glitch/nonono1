@@ -4,17 +4,19 @@
     --table-row-bg: #1B5E20;
     --table-row-text: #C8F7DC;
     --table-border: rgba(255,255,255,0.15);
+    
     /* ★ 특정 셀 색상 변수 추가 ★ */
-    --col-num-color: #FFC000; /* 번호 셀 기본값 */
-    --col-select-color: #00FFFF; /* 선택 유형 셀 기본값 */
-    --col-service-color: #FF0000; /* 매진 셀 기본값 */
+    --col-num-text-color: #FFC000;
+    --col-num-bg-color: transparent; /* 초기값은 투명 */
+    --col-select-text-color: #00FFFF;
+    --col-select-bg-color: transparent; /* 초기값은 투명 */
+    --col-service-color: #FF0000; /* 매진 글자색 */
 }
 
 body{
     margin:0;
     padding:0;
     background:#000;
-    /* font-family:'Noto Sans KR',sans-serif; 주석 처리 - 폰트 로드가 안되면 깨질 수 있으므로 */
     font-family:Arial, sans-serif;
     color:white;
 }
@@ -25,7 +27,7 @@ body{
     height:490px;
     margin:0 auto;
     position:relative;
-    background-image:url("vip.png"); /* 이 파일은 따로 준비하셔야 합니다 */
+    background-image:url("vip.png");
     background-size:cover;
     background-position:center;
 }
@@ -120,19 +122,22 @@ body{
     border-bottom:1px solid var(--table-border);
 }
 
-/* ★ 특정 셀 스타일 적용 (요청 사항) ★ */
+/* ★ 특정 셀 스타일 적용 (배경색/글자색 분리) ★ */
 /* 1. 번호 (첫 번째 열) */
-.data-table tr td:nth-child(1) {
-    color: var(--col-num-color);
+.data-table tbody tr td:nth-child(1) {
+    color: var(--col-num-text-color);
+    background: var(--col-num-bg-color); /* 배경색 적용 */
     font-weight: 700;
 }
 /* 2. 선택 유형 (두 번째 열) */
-.data-table tr td:nth-child(2) {
-    color: var(--col-select-color);
+.data-table tbody tr td:nth-child(2) {
+    color: var(--col-select-text-color);
+    background: var(--col-select-bg-color); /* 배경색 적용 */
 }
-/* 3. 서비스 (마지막 열, '매진') */
-.data-table tr td:last-child {
-    color: var(--col-service-color);
+/* 3. 서비스 (마지막 열, '매진' 글자색만) */
+.data-table tbody tr td:last-child {
+    color: var(--col-service-color); /* 글자색만 변경 */
+    /* 배경색은 기본 배경색을 따름 */
     font-weight: 900;
 }
 /* --------------------------------- */
@@ -166,7 +171,7 @@ body{
     font-size:12px;
     color:#fff;
     display:flex;
-    flex-direction:column; /* 세로로 정렬 */
+    flex-direction:column;
     gap:10px;
     z-index:10;
 }
