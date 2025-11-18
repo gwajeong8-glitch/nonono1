@@ -1,4 +1,7 @@
-:root{
+:root {
+    --left-number-color: #ffffff;
+    --type-select-color: #ffffff;
+    --soldout-text-color: #ff4444;
     --table-header-bg: #2196F3;
     --table-header-text: #ffffff;
     --table-row-bg: #1B5E20;
