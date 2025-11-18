@@ -10,6 +10,7 @@
     --col-num-bg-color: transparent; 
     --col-select-text-color: #00FFFF;
     --col-select-bg-color: transparent; 
+    --col-service-color: #FF0000;
 }
 
 body{
@@ -121,7 +122,7 @@ body{
     border-bottom:1px solid var(--table-border);
 }
 
-/* ★ 특정 셀 스타일 적용 (매진 글자 개별 색상 적용) ★ */
+/* ★ 특정 셀 스타일 적용 (충돌 방지 완료) ★ */
 /* 1. 번호 (첫 번째 열) */
 .data-table tbody tr td:nth-child(1) {
     color: var(--col-num-text-color);
@@ -133,25 +134,9 @@ body{
     color: var(--col-select-text-color);
     background: var(--col-select-bg-color); 
 }
-/* 3. 서비스 (마지막 열, '매진' 글자색 개별 적용) */
-/* row1의 '매진' 글자색 */
-.data-table tbody tr.row1 td:last-child {
-    color: #FF4500; /* 오렌지 레드 */
-    font-weight: 900;
-}
-/* row2의 '매진' 글자색 */
-.data-table tbody tr.row2 td:last-child {
-    color: #DA70D6; /* 연한 보라 */
-    font-weight: 900;
-}
-/* row3의 '매진' 글자색 */
-.data-table tbody tr.row3 td:last-child {
-    color: #00FF7F; /* 봄맞이 그린 */
-    font-weight: 900;
-}
-/* row4의 '매진' 글자색 */
-.data-table tbody tr.row4 td:last-child {
-    color: #4169E1; /* 로얄 블루 */
+/* 3. 서비스 (마지막 열, '매진' 글자색, 컨트롤 가능) */
+.data-table tbody tr td:last-child {
+    color: var(--col-service-color); 
     font-weight: 900;
 }
 /* --------------------------------- */
@@ -164,7 +149,7 @@ body{
 /* 하단 안내 */
 .notice{
     position:absolute;
-    bottom:20px;
+    bottom:60px;
     left:160px;
     right:160px;
     font-size:11px;
@@ -191,3 +176,33 @@ body{
 }
 .color-panel label{ display:flex; align-items:center; justify-content:space-between; gap:6px; white-space:nowrap; }
 .color-panel input[type=color]{ width:34px; height:22px; border:none; cursor:pointer; padding:0; }
+
+/* ★ 컬러 팔레트 스타일 추가 ★ */
+.palette-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 10px;
+    margin-top: 5px;
+}
+
+.color-palette {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 5px;
+    width: 175px; 
+}
+
+.color-swatch {
+    width: 38px; 
+    height: 25px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s;
+}
+
+.color-swatch:hover {
+    transform: scale(1.05);
+    border-color: white;
+}
+/* --------------------------------- */
