@@ -1,73 +1,174 @@
 :root{
-background: var(--table-header-bg);
-color: var(--table-header-text);
-height:38px;
-padding:10px 8px;
-border-bottom:2px solid var(--table-border);
-text-align:center;
+    --table-header-bg: #2196F3;
+    --table-header-text: #ffffff;
+    --table-row-bg: #1B5E20;
+    --table-row-text: #C8F7DC;
+    --table-border: rgba(255,255,255,0.15);
+    /* ★ 특정 셀 색상 변수 추가 ★ */
+    --col-num-color: #FFC000; /* 번호 셀 기본값 */
+    --col-select-color: #00FFFF; /* 선택 유형 셀 기본값 */
+    --col-service-color: #FF0000; /* 매진 셀 기본값 */
 }
 
+body{
+    margin:0;
+    padding:0;
+    background:#000;
+    /* font-family:'Noto Sans KR',sans-serif; 주석 처리 - 폰트 로드가 안되면 깨질 수 있으므로 */
+    font-family:Arial, sans-serif;
+    color:white;
+}
 
-/* 기본 셀 스타일 (행 배경/글자) */
+/* 래퍼 */
+.wrap{
+    width:1024px;
+    height:490px;
+    margin:0 auto;
+    position:relative;
+    background-image:url("vip.png"); /* 이 파일은 따로 준비하셔야 합니다 */
+    background-size:cover;
+    background-position:center;
+}
+
+/* 상단 탭 */
+.top-menu{
+    position:absolute;
+    top:50px;
+    left:190px;
+    display:flex;
+    gap:20px;
+    z-index:5;
+}
+.top-menu .menu{
+    background:rgba(160,160,160,0.3);
+    padding:8px 15px;
+    border-radius:5px;
+    font-size:14px;
+}
+
+/* 제목 / 서브 */
+.title{
+    position:absolute;
+    top:125px;
+    width:100%;
+    text-align:center;
+    font-size:28px;
+    font-weight:700;
+    z-index:5;
+}
+.subtitle{
+    position:absolute;
+    top:95px;
+    width:100%;
+    text-align:center;
+    transform:translateX(-5px);
+    font-size:14px;
+    color:#ffcc66;
+    z-index:5;
+}
+
+/* 왼쪽 메뉴 */
+.left-menu{
+    position:absolute;
+    left:50px;
+    top:120px;
+    width:115px;
+    line-height:16px;
+    font-size:13px;
+    z-index:5;
+}
+.left-item{
+    padding:1px 0;
+    cursor:pointer;
+    transition:0.15s;
+}
+.left-item.active{
+    color:#ffdd66;
+    font-weight:700;
+    text-shadow:0 0 6px #ffdd66;
+}
+
+/* 표 (한 번만 정의) */
+.data-table{
+    position:absolute;
+    top:170px;
+    left:160px;
+    width:800px;
+    border-collapse:collapse;
+    font-size:15px;
+    z-index:4;
+    overflow:hidden;
+    box-shadow:0 2px 0 rgba(0,0,0,0.35);
+}
+
+/* 헤더 */
+.data-table th{
+    background: var(--table-header-bg);
+    color: var(--table-header-text);
+    height:38px;
+    padding:10px 8px;
+    border-bottom:2px solid var(--table-border);
+    text-align:center;
+}
+
+/* 바디 셀 */
 .data-table td{
-background: var(--table-row-bg);
-color: var(--table-row-text);
-padding:10px 8px;
-text-align:center;
-border-bottom:1px solid var(--table-border);
+    background: var(--table-row-bg);
+    color: var(--table-row-text);
+    padding:10px 8px;
+    text-align:center;
+    border-bottom:1px solid var(--table-border);
 }
 
-
-/* 번호/유형 셀을 개별적으로 덮어쓰기 (셀 배경 + 텍스트) */
-.data-table td.num{
-background: var(--left-number-bg);
-color: var(--left-number-text);
+/* ★ 특정 셀 스타일 적용 (요청 사항) ★ */
+/* 1. 번호 (첫 번째 열) */
+.data-table tr td:nth-child(1) {
+    color: var(--col-num-color);
+    font-weight: 700;
 }
-.data-table td.type{
-background: var(--type-select-bg);
-color: var(--type-select-text);
+/* 2. 선택 유형 (두 번째 열) */
+.data-table tr td:nth-child(2) {
+    color: var(--col-select-color);
 }
-
-
-/* 매진은 글자 색만 변경 (셀 배경은 기본 유지) */
-.data-table td.sold{
-color: var(--soldout-text-color);
-font-weight:700;
+/* 3. 서비스 (마지막 열, '매진') */
+.data-table tr td:last-child {
+    color: var(--col-service-color);
+    font-weight: 900;
 }
+/* --------------------------------- */
 
-
-/* 호버 시 연한 강조 */
-.data-table tr:hover td{ background: rgba(255,255,255,0.03); }
-
+/* 호버 */
+.data-table tr:hover td{
+    background: rgba(255,255,255,0.05);
+}
 
 /* 하단 안내 */
 .notice{
-position:absolute;
-bottom:45px;
-left:180px;
-right:150px;
-font-size:11px;
-color:#ffcc66;
-line-height:1.5;
-text-align:left;
-z-index:6;
+    position:absolute;
+    bottom:60px;
+    left:160px;
+    right:160px;
+    font-size:11px;
+    color:#ffcc66;
+    line-height:1.5;
+    text-align:left;
+    z-index:5;
 }
 
-
-/* 컬러 패널 */
+/* 색상 패널 */
 .color-panel{
-position:fixed;
-top:60px;
-right:20px;
-background:rgba(0,0,0,0.55);
-padding:10px 12px;
-border-radius:6px;
-font-size:12px;
-color:#fff;
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-z-index:9999;
+    position:fixed;
+    top:60px;
+    right:20px;
+    background:rgba(0,0,0,0.55);
+    padding:8px 12px;
+    border-radius:6px;
+    font-size:12px;
+    color:#fff;
+    display:flex;
+    flex-direction:column; /* 세로로 정렬 */
+    gap:10px;
+    z-index:10;
 }
-.color-panel label{ display:flex; align-items:center; gap:6px; white-space:nowrap; }
-.color-panel input[type=color]{ width:34px; height:22px; border:none; cursor:pointer; }
+.color-panel label{ display:flex; align-items:center; justify-content:space-between; gap:6px; white-space:nowrap; }
+.color-panel input[type=color]{ width:34px; height:22px; border:none; cursor:pointer; padding:0; }
