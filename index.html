@@ -1,117 +1,60 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>실시간 데이터 현황</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+<table class="data-table">
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>선택 유형</th>
+        <th>포인트 금액</th>
+        <th>환불 금액</th>
+        <th>정확도</th>
+        <th>데이터 상태</th>
+        <th>서비스</th>
+    </tr>
+    </thead>
 
-<div class="wrap">
+    <tbody>
+    <tr>
+        <td class="num">1</td>
+        <td class="type">선택 가능</td>
+        <td>120,000</td>
+        <td>250,000</td>
+        <td>100%</td>
+        <td>정상</td>
+        <td class="sold">매진</td>
+    </tr>
 
-    <!-- 상단 탭 -->
-    <div class="top-menu">
-        <div class="menu">블레스 전국 프레스티지 서비스</div>
-        <div class="menu">VIP 회원 전용 통합 매니지먼트</div>
-        <div class="menu">노블레스 회원 전용룸</div>
-    </div>
+    <tr>
+        <td class="num">2</td>
+        <td class="type">선택 가능</td>
+        <td>230,000</td>
+        <td>276,000</td>
+        <td>100%</td>
+        <td>정상</td>
+        <td class="sold">매진</td>
+    </tr>
 
-    <!-- 제목 -->
-    <div class="title">실시간 데이터 현황</div>
+    <tr>
+        <td class="num">3</td>
+        <td class="type">선택 가능</td>
+        <td>570,000</td>
+        <td>584,000</td>
+        <td>100%</td>
+        <td>정상</td>
+        <td class="sold">매진</td>
+    </tr>
 
-    <!-- 서브 문구 -->
-    <div class="subtitle">
-        당신의 취향을 공유하며, 뜨거운 교감을 나눌 은밀한 파트너.
-        은밀한 만남을 통해 최상의 만족감을 경험하세요.
-    </div>
+    <tr>
+        <td class="num">4</td>
+        <td class="type">선택 가능</td>
+        <td>730,000</td>
+        <td>876,000</td>
+        <td>100%</td>
+        <td>정상</td>
+        <td class="sold">매진</td>
+    </tr>
+    </tbody>
+</table>
 
-    <!-- 왼쪽 메뉴 -->
-    <div class="left-menu">
-        <div class="left-item active">메인 화면</div>
-        <div class="left-item">[매칭/고객 상태]</div>
-        <div class="left-item">주문 상태</div>
-        <div class="left-item">인증 상태</div>
-        <div class="left-item">[상담/문의]</div>
-        <div class="left-item">직무 문의</div>
-        <div class="left-item">전국 만남</div>
-        <div class="left-item">[관리/데이터]</div>
-        <div class="left-item">실시간 데이터</div>
-        <div class="left-item">데이터 분석</div>
-        <div class="left-item">포인트 조회</div>
-        <div class="left-item">유흥 관리</div>
-        <div class="left-item">회원 관리</div>
-        <div class="left-item">회원 승인</div>
-        <div class="left-item">회원 탈퇴</div>
-        <div class="left-item">담당 실장</div>
-    </div>
-
-    <!-- 표 -->
-    <table class="data-table">
-        <thead>
-        <tr>
-            <th>번호</th>
-            <th>선택 유형</th>
-            <th>포인트 금액</th>
-            <th>환불 금액</th>
-            <th>정확도</th>
-            <th>데이터 상태</th>
-            <th>서비스</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr>
-            <td class="num">1</td>
-            <td class="type">선택 가능</td>
-            <td>120,000</td>
-            <td>250,000</td>
-            <td>100%</td>
-            <td>정상</td>
-            <td class="sold">매진</td>
-        </tr>
-
-        <tr>
-            <td class="num">2</td>
-            <td class="type">선택 가능</td>
-            <td>230,000</td>
-            <td>276,000</td>
-            <td>100%</td>
-            <td>정상</td>
-            <td class="sold">매진</td>
-        </tr>
-
-        <tr>
-            <td class="num">3</td>
-            <td class="type">선택 가능</td>
-            <td>570,000</td>
-            <td>584,000</td>
-            <td>100%</td>
-            <td>정상</td>
-            <td class="sold">매진</td>
-        </tr>
-
-        <tr>
-            <td class="num">4</td>
-            <td class="type">선택 가능</td>
-            <td>730,000</td>
-            <td>876,000</td>
-            <td>100%</td>
-            <td>정상</td>
-            <td class="sold">매진</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <!-- 하단 안내문 -->
-    <div class="notice">
-        [중요 공지] 업무 진행 중 핵심 정보를 누락하는 일이 없도록 정보를 담당자의 지시에 따라 신중하게 처리하시기 바랍니다.
-        개별적인 업무 처리로 발생하는 모든 결과에 대한 책임은 당사자에게 귀속됩니다.
-        진행 상황은 시스템에 실시간으로 반영되오니, 항상 확인하여 주십시오.
-    </div>
-
-</div>
-
-<!-- 🔹 컬러 설정 패널 -->
+<!-- 🔹컬러 패널 -->
 <div class="color-panel">
     <label>헤더 배경 <input type="color" id="headerBgColor" value="#2196F3"></label>
     <label>헤더 글자 <input type="color" id="headerTextColor" value="#ffffff"></label>
@@ -122,7 +65,3 @@
     <label>유형 색상 <input type="color" id="typeSelectColor" value="#ffffff"></label>
     <label>매진 색상 <input type="color" id="soldoutColor" value="#ff4444"></label>
 </div>
-
-<script src="script.js"></script>
-</body>
-</html>
