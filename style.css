@@ -23,13 +23,13 @@ body{
 
 /* 래퍼 (배경 이미지 미세한 틈새를 검은색으로 처리) */
 .wrap{
-    width:1029px; /* ★ 최종 조정: 너비를 1024px에서 1029px로 5픽셀 확장 ★ */
+    width:1024px; /* ★ 너비를 1024px로 복원 ★ */
     height:490px;
     margin:0 auto;
     position:relative;
     background-image:url("vip.png");
     background-size:cover;
-    background-position: calc(50% - 1px) center; /* ★ 최종 조정: 배경 이미지를 왼쪽으로 1px 이동 ★ */
+    background-position: center center; /* ★ 위치 조정도 center로 복원 ★ */
     background-color: #000; 
     overflow: hidden; 
 }
@@ -93,16 +93,16 @@ body{
 }
 
 /* 표 */
-.data-table{
-    position:absolute;
-    top:170px;
-    left:160px;
-    width:800px;
-    border-collapse:collapse;
-    font-size:15px;
-    z-index:4;
-    overflow:hidden;
-    box-shadow:0 2px 0 rgba(0,0,0,0.35);
+.wrap{
+    width:1024px; /* ★ 너비를 1024px로 복원 ★ */
+    height:490px;
+    margin:0 auto;
+    position:relative;
+    background-image:url("vip.png");
+    background-size:cover;
+    background-position: center center; /* ★ 위치 조정도 center로 복원 ★ */
+    background-color: #000; 
+    overflow: hidden; 
 }
 
 /* 헤더 */
