@@ -96,8 +96,8 @@ body{
 .data-table{
     position:absolute;
     top:170px;
-    left:160px;
-    width:802px; /* ★ 최종 조정: 너비를 802px로 늘려 오른쪽 틈을 완전히 덮습니다. ★ */
+    left:159px; /* ★ 최종 조정: 왼쪽 위치를 159px로 설정하여 테이블을 오른쪽으로 1px 이동 ★ */
+    width:802px; /* 너비는 802px를 유지하여 틈이 생기지 않도록 함 */
     border-collapse:collapse;
     font-size:15px;
     z-index:4;
