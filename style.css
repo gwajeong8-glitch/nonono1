@@ -1,218 +1,44 @@
-:root{
-    --table-header-bg: #2196F3;
-    --table-header-text: #ffffff;
-    --table-row-bg: #1B5E20;
-    --table-row-text: #C8F7DC;
-    --table-border: rgba(255,255,255,0.15);
-    
-    /* 특정 셀 색상 변수 */
-    --col-num-text-color: #FFC000;
-    --col-num-bg-color: transparent; 
-    --col-select-text-color: #00FFFF;
-    --col-select-bg-color: transparent; 
-    --col-service-color: #FF0000;
-}
+/* style.css 파일의 표 관련 부분 수정 */
 
-body{
-    margin:0;
-    padding:0;
-    background:#000;
-    font-family:Arial, sans-serif;
-    color:white;
-}
+/* ... (data-table 위치 조정: left:159px 유지) ... */
 
-/* 래퍼 (배경 이미지 미세한 틈새를 검은색으로 처리) */
-.wrap{
-    width:1024px;
-    height:490px;
-    margin:0 auto;
-    position:relative;
-    background-image:url("vip.png");
-    background-size:cover;
-    background-position:center;
-    background-color: #000; /* 미세한 틈을 메울 검은색 배경 */
-    overflow: hidden; /* wrap 범위를 벗어나는 내용 숨김 (미세한 줄 방지) */
-}
+/* 헤더 스타일은 삭제합니다 (th 관련 모두 제거) */
 
-/* 상단 탭 */
-.top-menu{
-    position:absolute;
-    top:50px;
-    left:190px;
-    display:flex;
-    gap:20px;
-    z-index:5;
-}
-.top-menu .menu{
-    background:rgba(160,160,160,0.3);
-    padding:8px 15px;
-    border-radius:5px;
-    font-size:14px;
-}
-
-/* 제목 / 서브 */
-.title{
-    position:absolute;
-    top:125px;
-    width:100%;
-    text-align:center;
-    font-size:28px;
-    font-weight:700;
-    z-index:5;
-}
-.subtitle{
-    position:absolute;
-    top:95px;
-    width:100%;
-    text-align:center;
-    transform:translateX(-5px);
-    font-size:14px;
-    color:#ffcc66;
-    z-index:5;
-}
-
-/* 왼쪽 메뉴 */
-.left-menu{
-    position:absolute;
-    left:50px;
-    top:120px;
-    width:115px;
-    line-height:16px;
-    font-size:13px;
-    z-index:5;
-}
-.left-item{
-    padding:1px 0;
-    cursor:pointer;
-    transition:0.15s;
-}
-.left-item.active{
-    color:#ffdd66;
-    font-weight:700;
-    text-shadow:0 0 6px #ffdd66;
-}
-
-/* 표 (오른쪽 줄을 완전히 덮기 위해 너비 2px 확장) */
-.data-table{
-    position:absolute;
-    top:170px;
-    left:159px; /* ★ 최종 조정: 왼쪽 위치를 159px로 설정하여 테이블을 오른쪽으로 1px 이동 ★ */
-    width:802px; /* 너비는 802px를 유지하여 틈이 생기지 않도록 함 */
-    border-collapse:collapse;
-    font-size:15px;
-    z-index:4;
-    overflow:hidden;
-    box-shadow:0 2px 0 rgba(0,0,0,0.35);
-}
-
-/* 헤더 */
-.data-table th{
-    background: var(--table-header-bg);
-    color: var(--table-header-text);
-    height:38px;
-    padding:10px 8px;
-    border-bottom:2px solid var(--table-border);
-    text-align:center;
-}
-.data-table th:last-child {
-    border-right: none; /* 마지막 헤더는 오른쪽 경계선 제거 */
-}
-
-/* 바디 셀 */
+/* 바디 셀 (기본 스타일) */
 .data-table td{
-    background: var(--table-row-bg);
-    color: var(--table-row-text);
+    background: var(--table-row-bg); /* 행 배경색 사용 */
+    color: var(--table-row-text); /* 행 글자색 사용 */
     padding:10px 8px;
+    height:38px; /* 높이 고정 */
     text-align:center;
     border-bottom:1px solid var(--table-border);
-}
-.data-table td:last-child {
-    border-right: none; /* 마지막 셀은 오른쪽 경계선 제거 */
+    border-right:1px solid var(--table-border); /* 모든 셀에 경계선 추가 */
 }
 
-/* 특정 셀 스타일 적용 */
-/* 1. 번호 (첫 번째 열) */
-.data-table tbody tr td:nth-child(1) {
-    color: var(--col-num-text-color);
-    background: var(--col-num-bg-color); 
+/* 마지막 셀의 오른쪽 경계선 제거 */
+.data-table tr td:last-child {
+    border-right: none;
+}
+
+/* ★ 1. 상단 통합 셀 스타일 ★ */
+.data-table .top-integrated-cell {
+    background: var(--table-header-bg); /* 헤더 배경색 사용 */
+    color: var(--table-header-text); /* 헤더 글자색 사용 */
+    padding: 12px 8px;
+    font-size: 16px;
     font-weight: 700;
+    border-bottom: 2px solid var(--table-border);
 }
-/* 2. 선택 유형 (두 번째 열) */
-.data-table tbody tr td:nth-child(2) {
-    color: var(--col-select-text-color);
-    background: var(--col-select-bg-color); 
-}
-/* 3. 서비스 (마지막 열, '매진' 글자색, 컨트롤 가능) */
-.data-table tbody tr td:last-child {
-    color: var(--col-service-color); 
+
+/* ★ 3. 중간 고정 글자 셀 스타일 ★ */
+.data-table .middle-fixed-text-cell {
+    background: rgba(255, 0, 0, 0.1); /* 고정 텍스트 배경을 옅게 줌 */
+    color: #FF0000; /* 고정 텍스트 글자색 강조 */
+    padding: 12px 8px;
     font-weight: 900;
 }
 
-/* 호버 */
-.data-table tr:hover td{
-    background: rgba(255,255,255,0.05);
-}
-
-/* 하단 안내 */
-.notice{
-    position:absolute;
-    bottom:60px;
-    left:160px; 
-    right:160px; 
-    font-size:11px;
-    color:#ffcc66;
-    line-height:1.5;
-    text-align:left;
-    z-index:5;
-    white-space: nowrap; /* ★ 하단 문구 2줄 고정 ★ */
-}
-
-/* 색상 패널 */
-.color-panel{
-    position:fixed;
-    top:60px;
-    right:20px;
-    background:rgba(0,0,0,0.55);
-    padding:8px 12px;
-    border-radius:6px;
-    font-size:12px;
-    color:#fff;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    z-index:10;
-}
-.color-panel label{ display:flex; align-items:center; justify-content:space-between; gap:6px; white-space:nowrap; }
-.color-panel input[type=color]{ width:34px; height:22px; border:none; cursor:pointer; padding:0; }
-
-/* 컬러 팔레트 스타일 (맨 위로 이동됨) */
-.palette-section {
-    border-top: none;
-    padding-top: 0;
-    margin-top: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
-    padding-bottom: 10px;
-    margin-bottom: 5px;
-}
-
-.color-palette {
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 5px;
-    width: 175px; 
-}
-
-.color-swatch {
-    width: 38px; 
-    height: 25px;
-    border-radius: 4px;
-    cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    transition: transform 0.1s;
-}
-
-.color-swatch:hover {
-    transform: scale(1.05);
-    border-color: white;
-}
+/* 특정 셀 스타일 적용: 더 이상 '번호', '선택 유형' 셀이 없으므로 이 코드는 삭제 또는 주석 처리합니다. */
+/* .data-table tbody tr td:nth-child(1) { ... } */
+/* .data-table tbody tr td:nth-child(2) { ... } */
+/* .data-table tbody tr td:last-child { ... } */
