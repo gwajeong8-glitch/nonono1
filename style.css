@@ -29,9 +29,10 @@ body{
     position:relative;
     background-image:url("vip.png");
     background-size:cover;
-    background-position:center;
-    background-color: #000; /* 미세한 틈을 메울 검은색 배경 */
-    overflow: hidden; /* wrap 범위를 벗어나는 내용 숨김 (미세한 줄 방지) */
+    /* background-position:center; <--- 이 부분을 아래와 같이 수정합니다 */
+    background-position: calc(50% + 1px) center; /* ★ 최종 조정: 배경 이미지를 오른쪽으로 1px 이동 ★ */
+    background-color: #000; 
+    overflow: hidden; 
 }
 
 /* 상단 탭 */
