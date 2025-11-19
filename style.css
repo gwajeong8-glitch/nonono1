@@ -23,15 +23,15 @@ body{
 
 /* 래퍼 (배경 이미지 미세한 틈새를 검은색으로 처리) */
 .wrap{
-    width:1024px; /* ★ 너비를 1024px로 복원 ★ */
+    width:1024px;
     height:490px;
     margin:0 auto;
     position:relative;
     background-image:url("vip.png");
     background-size:cover;
-    background-position: center center; /* ★ 위치 조정도 center로 복원 ★ */
-    background-color: #000; 
-    overflow: hidden; 
+    background-position:center;
+    background-color: #000; /* 미세한 틈을 메울 검은색 배경 */
+    overflow: hidden; /* wrap 범위를 벗어나는 내용 숨김 (미세한 줄 방지) */
 }
 
 /* 상단 탭 */
@@ -92,17 +92,17 @@ body{
     text-shadow:0 0 6px #ffdd66;
 }
 
-/* 표 */
-.wrap{
-    width:1024px; /* ★ 너비를 1024px로 복원 ★ */
-    height:490px;
-    margin:0 auto;
-    position:relative;
-    background-image:url("vip.png");
-    background-size:cover;
-    background-position: center center; /* ★ 위치 조정도 center로 복원 ★ */
-    background-color: #000; 
-    overflow: hidden; 
+/* 표 (오른쪽 줄을 완전히 덮기 위해 너비 2px 확장) */
+.data-table{
+    position:absolute;
+    top:170px;
+    left:160px;
+    width:802px; /* ★ 최종 조정: 너비를 802px로 늘려 오른쪽 틈을 완전히 덮습니다. ★ */
+    border-collapse:collapse;
+    font-size:15px;
+    z-index:4;
+    overflow:hidden;
+    box-shadow:0 2px 0 rgba(0,0,0,0.35);
 }
 
 /* 헤더 */
@@ -115,7 +115,7 @@ body{
     text-align:center;
 }
 .data-table th:last-child {
-    border-right: none; /* 오른쪽 흰색 선 제거 */
+    border-right: none; /* 마지막 헤더는 오른쪽 경계선 제거 */
 }
 
 /* 바디 셀 */
@@ -127,7 +127,7 @@ body{
     border-bottom:1px solid var(--table-border);
 }
 .data-table td:last-child {
-    border-right: none; /* 오른쪽 흰색 선 제거 */
+    border-right: none; /* 마지막 셀은 오른쪽 경계선 제거 */
 }
 
 /* 특정 셀 스타일 적용 */
@@ -156,7 +156,7 @@ body{
 /* 하단 안내 */
 .notice{
     position:absolute;
-    bottom:50px;
+    bottom:60px;
     left:160px; 
     right:160px; 
     font-size:11px;
@@ -190,7 +190,7 @@ body{
     border-top: none;
     padding-top: 0;
     margin-top: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 하단 구분선만 유지 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
     padding-bottom: 10px;
     margin-bottom: 5px;
 }
