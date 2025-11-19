@@ -23,13 +23,13 @@ body{
 
 /* 래퍼 (배경 이미지 미세한 틈새를 검은색으로 처리) */
 .wrap{
-    width:1026px; /* ★ 최종 조정: 너비를 1024px에서 1026px로 확장하여 좌우 틈새를 덮음 ★ */
+    width:1028px; /* ★ 최종 조정: 너비를 1024px에서 1028px로 확장 (4픽셀 증가) ★ */
     height:490px;
     margin:0 auto;
     position:relative;
     background-image:url("vip.png");
     background-size:cover;
-    background-position: center center; /* 위치 조정을 원래대로 center로 복원 */
+    background-position: calc(50% + 2px) center; /* ★ 최종 조정: 배경 이미지를 오른쪽으로 2px 이동 ★ */
     background-color: #000; 
     overflow: hidden; 
 }
