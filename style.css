@@ -1,18 +1,97 @@
-/* style.css 파일의 표 관련 부분 수정 */
+:root{
+    /* 기존 색상 변수들은 새로운 테이블에 맞게 재정의되거나 사용됩니다. */
+    --table-header-bg: #2196F3;
+    --table-header-text: #ffffff;
+    --table-row-bg: #1B5E20; /* 녹색 행 배경 */
+    --table-row-text: #C8F7DC; /* 밝은 녹색 행 글자 */
+    --table-border: rgba(255,255,255,0.15);
+    
+    /* 이미지 기반의 새로운 색상 변수 추가 */
+    --yellow-bg: #FFE082; /* 중간 노란색 배경 */
+    --dark-text: #1A1A1A; /* 어두운 글자색 */
+    --red-highlight: #FF0000; /* 빨간색 강조 글자 */
+}
 
-/* ... (data-table 위치 조정: left:159px 유지) ... */
+body{
+    margin:0;
+    padding:0;
+    background:#000;
+    font-family:Arial, sans-serif;
+    color:white;
+}
 
-/* 헤더 스타일은 삭제합니다 (th 관련 모두 제거) */
+/* 래퍼 (기본 크기 유지) */
+.wrap{
+    width:1024px;
+    height:490px;
+    margin:0 auto;
+    position:relative;
+    background-image:url("vip.png"); /* 배경 이미지 유지 */
+    background-size:cover;
+    background-position: center center;
+    background-color: #000;
+    overflow: hidden;
+}
 
-/* 바디 셀 (기본 스타일) */
+/* 상단 탭 */
+.top-menu{
+    position:absolute; top:50px; left:190px; display:flex; gap:20px; z-index:5;
+}
+.top-menu .menu{
+    background:rgba(160,160,160,0.3);
+    padding:8px 15px; border-radius:5px; font-size:14px;
+}
+
+/* N 로고 및 NOBLESSE 텍스트 배치 */
+.noblesse-logo {
+    position: absolute; right: 28px; top: 110px; z-index: 5;
+    font-size: 14px; font-weight: 700; color: #FFD700;
+}
+.noblesse-heart {
+    position: absolute; right: 25px; top: 70px; z-index: 5;
+    /* 실제 이미지 파일이 있다면 여기에 background-image를 사용해야 함 */
+    width: 40px; height: 40px; background: url('heart_icon.png') no-repeat center/contain; 
+}
+
+/* 제목 / 서브 */
+.title{
+    position:absolute; top:125px; width:100%; text-align:center; font-size:28px; font-weight:700; z-index:5;
+}
+.subtitle{
+    position:absolute; top:95px; width:100%; text-align:center; transform:translateX(-5px); 
+    font-size:14px; color:#ffcc66; z-index:5;
+}
+
+/* 왼쪽 메뉴 */
+.left-menu{
+    position:absolute; left:50px; top:120px; width:115px; line-height:16px; font-size:13px; z-index:5;
+}
+.left-item{ padding:1px 0; cursor:pointer; transition:0.15s; }
+.left-item.active{ color:#ffdd66; font-weight:700; text-shadow:0 0 6px #ffdd66; }
+
+/* 표 (오른쪽 줄을 덮기 위해 왼쪽 위치를 조정) */
+.data-table{
+    position:absolute;
+    top:170px;
+    left:159px; /* 오른쪽 줄 제거를 위한 1px 조정 유지 */
+    width:802px;
+    border-collapse:collapse;
+    font-size:13px; /* 전체 폰트 크기 조정 */
+    z-index:4;
+    overflow:hidden;
+    box-shadow:0 2px 0 rgba(0,0,0,0.35);
+}
+
+/* ★ 테이블 셀 기본 스타일 (모든 <td>에 적용) ★ */
 .data-table td{
-    background: var(--table-row-bg); /* 행 배경색 사용 */
-    color: var(--table-row-text); /* 행 글자색 사용 */
-    padding:10px 8px;
-    height:38px; /* 높이 고정 */
+    background: var(--table-row-bg); /* 기본 녹색 배경 */
+    color: var(--table-row-text); /* 기본 밝은 녹색 글자 */
+    padding:8px 8px;
+    height:25px; /* 높이 조정 */
     text-align:center;
     border-bottom:1px solid var(--table-border);
-    border-right:1px solid var(--table-border); /* 모든 셀에 경계선 추가 */
+    border-right:1px solid var(--table-border);
+    white-space: nowrap;
 }
 
 /* 마지막 셀의 오른쪽 경계선 제거 */
@@ -20,25 +99,105 @@
     border-right: none;
 }
 
-/* ★ 1. 상단 통합 셀 스타일 ★ */
-.data-table .top-integrated-cell {
-    background: var(--table-header-bg); /* 헤더 배경색 사용 */
-    color: var(--table-header-text); /* 헤더 글자색 사용 */
-    padding: 12px 8px;
-    font-size: 16px;
+/* ------------------------------------------- */
+/* ★ 1. 상단 공지 통합 셀 (.top-notice-row) ★ */
+/* ------------------------------------------- */
+.data-table .top-notice-row td {
+    background: #FFD700; /* 노란색 배경 */
+    color: var(--dark-text); /* 어두운 글자색 */
+    text-align: left;
+    padding: 3px 8px;
+    font-size: 11px;
     font-weight: 700;
+    line-height: 1.4;
+    border-bottom: 2px solid var(--table-border);
+}
+.data-table .top-notice-mark {
+    color: var(--red-highlight); /* DAMAGE! 부분 빨간색 */
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+
+/* ------------------------------------------- */
+/* ★ 2. 상단 데이터 헤더 (.top-data-header) ★ */
+/* ------------------------------------------- */
+.data-table .top-data-header td {
+    background: var(--table-header-bg); /* 헤더 배경색 (파란색) */
+    color: var(--table-header-text); /* 헤더 글자색 (흰색) */
+    font-weight: 700;
+    height: 30px;
+}
+.data-table .top-data-header td:nth-child(2),
+.data-table .top-data-header td:nth-child(3),
+.data-table .top-data-header td:nth-child(4),
+.data-table .top-data-header td:nth-child(5) {
+    width: 15%; /* 열 너비 조정 */
+}
+.data-table .top-data-header td:nth-child(1) {
+    width: 10%;
+}
+
+/* ------------------------------------------- */
+/* ★ 3. 상단 데이터 행 (.top-data-row) ★ */
+/* ------------------------------------------- */
+.data-table .top-data-row td:nth-child(3),
+.data-table .top-data-row td:nth-child(4) {
+    color: var(--red-highlight); /* '발송 오류', '검수실패 불가' 빨간색 */
+    font-weight: 700;
+}
+
+
+/* ------------------------------------------- */
+/* ★ 4. 중간 제목 셀 (.middle-title-row) ★ */
+/* ------------------------------------------- */
+.data-table .middle-title-row td {
+    background: var(--yellow-bg); /* 노란색 배경 */
+    color: var(--dark-text); /* 어두운 글자색 */
+    font-size: 16px;
+    font-weight: 900;
+    padding: 8px;
     border-bottom: 2px solid var(--table-border);
 }
 
-/* ★ 3. 중간 고정 글자 셀 스타일 ★ */
-.data-table .middle-fixed-text-cell {
-    background: rgba(255, 0, 0, 0.1); /* 고정 텍스트 배경을 옅게 줌 */
-    color: #FF0000; /* 고정 텍스트 글자색 강조 */
-    padding: 12px 8px;
-    font-weight: 900;
+
+/* ------------------------------------------- */
+/* ★ 5. 중간 공지사항 셀 (.middle-notice-row) ★ */
+/* ------------------------------------------- */
+.data-table .middle-notice-row td {
+    background: var(--yellow-bg); /* 노란색 배경 */
+    color: var(--dark-text); /* 어두운 글자색 */
+    text-align: left;
+    padding: 10px 15px;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: normal; /* 줄바꿈 허용 */
+    border-bottom: 2px solid var(--table-border);
 }
 
-/* 특정 셀 스타일 적용: 더 이상 '번호', '선택 유형' 셀이 없으므로 이 코드는 삭제 또는 주석 처리합니다. */
-/* .data-table tbody tr td:nth-child(1) { ... } */
-/* .data-table tbody tr td:nth-child(2) { ... } */
-/* .data-table tbody tr td:last-child { ... } */
+
+/* ------------------------------------------- */
+/* ★ 6. 하단 데이터 헤더 (.bottom-data-header) ★ */
+/* ------------------------------------------- */
+.data-table .bottom-data-header td {
+    background: var(--table-header-bg); /* 헤더 배경색 (파란색) */
+    color: var(--table-header-text); /* 헤더 글자색 (흰색) */
+    font-weight: 700;
+    height: 30px;
+    width: 20%; /* 5개 열을 20%씩 분할 */
+}
+
+/* ------------------------------------------- */
+/* ★ 7. 하단 데이터 행 (.bottom-data-row) ★ */
+/* ------------------------------------------- */
+.data-table .bottom-data-row td {
+    font-weight: 700;
+}
+.data-table .bottom-data-row .red-text {
+    color: var(--red-highlight); /* 빨간색 글자 강조 */
+}
+
+/* 호버 (기존 유지) */
+.data-table tr:hover td{
+    background: rgba(255,255,255,0.05);
+}
