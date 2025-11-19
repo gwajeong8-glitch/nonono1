@@ -1,131 +1,29 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>실시간 데이터 현황 - 노블레스 통합 매니지먼트</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<div class="wrap">
-
-    <div class="top-menu">
-        <div class="menu">블레스 전국 프레스티지 서비스</div>
-        <div class="menu">VIP 회원 전용 통합 매니지먼트</div>
-        <div class="menu">노블레스 회원 전용룸</div>
-    </div>
-
-    <div class="title">실시간 데이터 현황</div>
-
-    <div class="subtitle">
-        당신의 취향을 공유하며, 뜨거운 교감을 나눌 은밀한 파트너. 은밀한 만남을 통해 최상의 만족감을 경험하세요.
-    </div>
-
-    <div class="left-menu">
-        <div class="left-item active">메인 화면</div>
-        <div class="left-item">[매칭/고객 상태]</div>
-        <div class="left-item">주문 상태</div>
-        <div class="left-item">인증 상태</div>
-        <div class="left-item">[상담/문의]</div>
-        <div class="left-item">직무 문의</div>
-        <div class="left-item">전국 만남</div>
-        <div class="left-item">[관리/데이터]</div>
-        <div class="left-item">실시간 데이터</div>
-        <div class="left-item">실시간 오류</div>
-        <div class="left-item">데이터 분석</div>
-        <div class="left-item">포인트 조회</div>
-        <div class="left-item">유흥 관리</div>
-        <div class="left-item">회원 관리</div>
-        <div class="left-item">회원 승인</div>
-        <div class="left-item">회원 탈퇴</div>
-        <div class="left-item">담당 실장</div>
-    </div>
-
-    <table class="data-table">
-        <thead>
+<table class="data-table">
+    <tbody>
         <tr>
-            <th>번호</th>
-            <th>선택 유형</th>
-            <th>포인트 금액</th>
-            <th>환불 금액</th>
-            <th>정확도</th>
-            <th>데이터 상태</th>
-            <th>서비스</th>
+            <td colspan="7" contenteditable="true" class="top-integrated-cell" style="font-size:16px; font-weight:700;">
+                실시간 데이터 통합 현황 / 중요 정보 공지
+            </td>
         </tr>
-        </thead>
-
-        <tbody>
-        <tr class="row1">
-            <td contenteditable="true">1</td>
-            <td contenteditable="true">선택 가능</td>
-            <td contenteditable="true">120,000</td>
-            <td contenteditable="true">250,000</td>
-            <td contenteditable="true">100%</td>
-            <td contenteditable="true">정상</td>
-            <td contenteditable="true">매진</td>
+        
+        <tr>
+            <td contenteditable="true">정보 입력 A</td>
+            <td contenteditable="true">정보 입력 B</td>
+            <td contenteditable="true">정보 입력 C</td>
+            <td contenteditable="true">정보 입력 D</td>
+            <td contenteditable="true">정보 입력 E</td>
+            <td></td> <td></td> </tr>
+        
+        <tr>
+            <td colspan="7" class="middle-fixed-text-cell" style="color:red; font-weight:900; background:rgba(255, 255, 255, 0.05);">
+                ★ 이 부분은 고정된 텍스트가 들어가는 셀입니다. ★
+            </td>
         </tr>
-
-        <tr class="row2">
-            <td contenteditable="true">2</td>
-            <td contenteditable="true">선택 가능</td>
-            <td contenteditable="true">230,000</td>
-            <td contenteditable="true">276,000</td>
-            <td contenteditable="true">100%</td>
-            <td contenteditable="true">정상</td>
-            <td contenteditable="true">매진</td>
-        </tr>
-
-        <tr class="row3">
-            <td contenteditable="true">3</td>
-            <td contenteditable="true">선택 가능</td>
-            <td contenteditable="true">570,000</td>
-            <td contenteditable="true">584,000</td>
-            <td contenteditable="true">100%</td>
-            <td contenteditable="true">정상</td>
-            <td contenteditable="true">매진</td>
-        </tr>
-
-        <tr class="row4">
-            <td contenteditable="true">4</td>
-            <td contenteditable="true">선택 가능</td>
-            <td contenteditable="true">730,000</td>
-            <td contenteditable="true">876,000</td>
-            <td contenteditable="true">100%</td>
-            <td contenteditable="true">정상</td>
-            <td contenteditable="true">매진</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <div class="notice">
-        [중요 공지] 업무 진행 중 핵심 정보를 누락하는 일이 없도록 담당자의 지시에 따라 신중하게 처리하시기 바랍니다.<br>개별 업무 처리로 발생하는 모든 결과 책임은 당사자에게 귀속됩니다. 진행 상황은 시스템에 실시간 반영되오니, 항상 확인하여 주십시오.
-    </div>
-
-</div>
-
-<div class="color-panel" aria-hidden="false">
-    
-    <div class="palette-section">
-        <label>클릭으로 색상 선택</label>
-        <div class="color-palette">
-            </div>
-    </div>
-    <label>헤더 배경 <input type="color" id="headerBgColor" value="#2196F3"></label>
-    <label>헤더 글자 <input type="color" id="headerTextColor" value="#ffffff"></label>
-    <label>행 배경 <input type="color" id="rowBgColor" value="#1B5E20"></label>
-    <label>행 글자 <input type="color" id="rowTextColor" value="#C8F7DC"></label>
-    
-    <label>번호 셀 글자 <input type="color" id="colNumTextColor" value="#FFC000"></label>
-    <label>번호 셀 배경 <input type="color" id="colNumBgColor" value="#333333"></label>
-    <label>선택 유형 글자 <input type="color" id="colSelectTextColor" value="#00FFFF"></label>
-    <label>선택 유형 배경 <input type="color" id="colSelectBgColor" value="#333333"></label>
-    <label>매진 글자 <input type="color" id="colServiceColor" value="#FF0000"></label>
-    
-    <label>제목 변경
-        <input type="text" id="titleInput" placeholder="제목을 입력하세요" style="width:140px;">
-    </label>
-</div>
-
-<script src="script.js"></script>
-</body>
-</html>
+        
+        <tr>
+            <td contenteditable="true">하단 정보 1</td>
+            <td contenteditable="true">하단 정보 2</td>
+            <td contenteditable="true">하단 정보 3</td>
+            <td></td> <td></td> <td></td> <td></td> </tr>
+    </tbody>
+</table>
