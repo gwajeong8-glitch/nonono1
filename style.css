@@ -1,17 +1,3 @@
-:root{
-    /* 기존 색상 변수들은 새로운 테이블에 맞게 재정의되거나 사용됩니다. */
-    --table-header-bg: #2196F3;
-    --table-header-text: #ffffff;
-    --table-row-bg: #1B5E20; /* 녹색 행 배경 */
-    --table-row-text: #C8F7DC; /* 밝은 녹색 행 글자 */
-    --table-border: rgba(255,255,255,0.15);
-    
-    /* 이미지 기반의 새로운 색상 변수 추가 */
-    --yellow-bg: #FFE082; /* 중간 노란색 배경 */
-    --dark-text: #1A1A1A; /* 어두운 글자색 */
-    --red-highlight: #FF0000; /* 빨간색 강조 글자 */
-}
-
 body{
     margin:0;
     padding:0;
@@ -20,210 +6,115 @@ body{
     color:white;
 }
 
-/* 래퍼 (기본 크기 유지) */
+/* 래퍼 (캡처 대상 영역) */
 .wrap{
     width:1024px;
     height:490px;
     margin:0 auto;
     position:relative;
-    background-image:url("vip.png"); /* 배경 이미지 유지 */
-    background-size:cover;
-    background-position: center center;
     background-color: #000;
     overflow: hidden;
+    display: flex; /* 내부 요소 정렬을 위해 추가 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
 }
 
-/* 상단 탭 */
+/* 상단 탭 메뉴 */
 .top-menu{
     position:absolute;
     top:50px;
-    left:190px;
+    left:190px; /* 기존 위치 유지 */
     display:flex;
     gap:20px;
-    z-index:5;
+    z-index:10; /* 설정 패널보다 위로 */
 }
 .top-menu .menu{
     background:rgba(160,160,160,0.3);
     padding:8px 15px;
     border-radius:5px;
     font-size:14px;
-}
-
-/* N 로고 및 NOBLESSE 텍스트 배치 (축소 반영) */
-.noblesse-logo {
-    position: absolute; right: 25px; top: 115px; z-index: 5;
-    font-size: 11px;
-    font-weight: 700; color: #FFD700;
-}
-.noblesse-heart {
-    position: absolute; right: 25px; top: 75px; z-index: 5;
-    /* 실제 이미지 파일이 있다면 여기에 background-image를 사용해야 함 */
-    width: 30px;
-    height: 30px;
-    background: url('heart_icon.png') no-repeat center/contain; 
-}
-
-/* 제목 / 서브 (삭제됨) */
-.title{
-    position:absolute; top:125px; width:100%; text-align:center; 
-    font-size:20px;
-    font-weight:700; z-index:5;
-}
-.subtitle{ /* 이 클래스는 HTML에서 제거되었지만, 혹시 모를 상황을 위해 CSS에는 유지 */
-    position:absolute; top:100px; width:100%; text-align:center; transform:translateX(-5px); 
-    font-size:10px;
-    color:#ffcc66; z-index:5;
-}
-/* 왼쪽 메뉴 */
-.left-menu{
-    position:absolute;
-    left:50px;
-    top:120px;
-    width:115px;
-    line-height:16px;
-    font-size:13px;
-    z-index:5;
-}
-.left-item{
-    padding:1px 0;
     cursor:pointer;
-    transition:0.15s;
+    transition: background-color 0.2s, color 0.2s;
 }
-.left-item.active{
-    color:#ffdd66;
+.top-menu .menu.active{
+    background:#ffdd66;
+    color:#1A1A1A;
     font-weight:700;
-    text-shadow:0 0 6px #ffdd66;
-}
-/* 표 (너비 50px 증가 반영) */
-.data-table{
-    position:absolute;
-    top:100px;
-    left:155px; 
-    width:730px; 
-    border-collapse:collapse;
-    font-size:8px; /* 기본 글자 크기 (최소화) */
-    z-index:4;
-    overflow:hidden;
-    box-shadow:0 2px 0 rgba(0,0,0,0.35);
 }
 
-/* ★ 테이블 셀 기본 스타일 (최소화 반영) ★ */
-.data-table td{
-    background: var(--table-row-bg); 
-    color: var(--table-row-text); 
-    padding:2px 2px; /* 최소화 */
-    height:16px; /* 최소화. top-data-row에서 오버라이드 예정 */
-    text-align:center;
-    border-bottom:1px solid var(--table-border);
-    border-right:1px solid var(--table-border);
-    white-space: nowrap;
+/* VIP 카드 디스플레이 영역 */
+.vip-card-display{
+    width: 900px; /* 카드 이미지 크기에 맞게 조절 */
+    height: 500px; /* 카드 이미지 크기에 맞게 조절 */
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    border-radius: 10px; /* 카드 모서리 둥글게 */
+    overflow: hidden; /* 배경 이미지 잘림 방지 */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* 그림자 효과 */
+    display: flex;
+    justify-content: flex-start; /* 텍스트는 왼쪽 정렬 */
+    align-items: flex-end; /* 텍스트는 아래쪽 정렬 */
+    padding: 20px; /* 텍스트와 하단/좌측 여백 */
+    box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
 }
 
-/* 마지막 셀의 오른쪽 경계선 제거 */
-.data-table tr td:last-child {
-    border-right: none;
+/* VIP 카드 위에 표시될 텍스트 오버레이 */
+.vip-text-overlay{
+    position: absolute; /* 카드 이미지 위에 배치 */
+    bottom: 30px; /* 하단에서 여백 */
+    left: 400px; /* 왼쪽에서 여백, 이미지 상 ID 위치 조정 필요 */
+    color: white; /* 텍스트 색상 */
+    font-size: 20px; /* 글자 크기 */
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* 글자 그림자 */
+    line-height: 1.5;
+    white-space: nowrap; /* 줄바꿈 방지 */
 }
 
-/* ------------------------------------------- */
-/* ★ 1. 상단 공지 통합 셀 (.top-notice-row) (축소 반영) ★ */
-/* ------------------------------------------- */
-.data-table .top-notice-row td {
-    background: #FFD700; 
-    color: var(--dark-text); 
-    text-align: left;
-    padding: 1px 4px; 
-    font-size: 8px;
-    font-weight: 700;
-    line-height: 1.2;
-    border-bottom: 2px solid var(--table-border);
+/* 편집 가능한 텍스트 스타일 */
+.vip-text-overlay span[contenteditable="true"] {
+    background: rgba(255, 255, 255, 0.1); /* 편집 시 배경색 */
+    padding: 2px 5px;
+    border-radius: 3px;
+    min-width: 100px; /* 최소 너비 */
+    display: inline-block; /* 너비 조절 가능하게 */
+    outline: none; /* 클릭 시 아웃라인 제거 */
+    border: 1px dashed rgba(255,255,255,0.3); /* 편집임을 알리는 테두리 */
 }
-.data-table .top-notice-mark {
-    color: var(--red-highlight); 
-    font-weight: 900;
-    margin-right: 2px;
+.vip-text-overlay span[contenteditable="true"]:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #ffdd66; /* 포커스 시 테두리 색상 */
 }
 
-
-/* ------------------------------------------- */
-/* ★ 2. 상단 데이터 헤더 (.top-data-header) (높이 축소 반영) ★ */
-/* ------------------------------------------- */
-.data-table .top-data-header td {
-    background: var(--table-header-bg); 
-    color: var(--table-header-text); 
-    font-weight: 700;
-    height: 15px; /* ★ 18px -> 15px로 축소 */
-    width: 20%; 
+/* --- 설정 패널 관련 CSS --- */
+.setting-panel{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 250px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.7); 
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: white;
+    z-index: 100; 
+    font-size: 12px;
+    backdrop-filter: blur(5px); 
+    display: none; /* VIP 카드 기능에서는 필요 없으므로 숨김 */
 }
-
-
-/* ------------------------------------------- */
-/* ★ 3. 상단 데이터 행 (.top-data-row) (높이 축소 반영) ★ */
-/* ------------------------------------------- */
-.data-table .top-data-row td {
-    height: 15px; /* ★ 16px -> 15px로 축소 (위 아래 셀 크기 줄이기) */
+.download-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
 }
-.data-table .top-data-row td:nth-child(3),
-.data-table .top-data-row td:nth-child(4) {
-    color: var(--red-highlight); 
-    font-weight: 700;
-}
-
-
-/* ------------------------------------------- */
-/* ★ 4. 중간 제목 셀 (.middle-title-row) (높이 확대 반영) ★ */
-/* ------------------------------------------- */
-.data-table .middle-title-row td {
-    background: var(--yellow-bg); 
-    color: var(--dark-text); 
-    font-size: 12px; /* ★ 10px -> 12px로 확대 */
-    font-weight: 900;
-    padding: 6px 4px; /* ★ 위/아래 패딩 4px -> 6px로 확대 */
-    border-bottom: 2px solid var(--table-border);
-}
-
-
-/* ------------------------------------------- */
-/* ★ 5. 중간 공지사항 셀 (.middle-notice-row) (축소 반영) ★ */
-/* ------------------------------------------- */
-.data-table .middle-notice-row td {
-    background: var(--yellow-bg); 
-    color: var(--dark-text); 
-    text-align: left;
-    padding: 4px 6px; 
-    font-size: 8px; 
-    line-height: 1.3; 
-    white-space: normal; 
-    border-bottom: 2px solid var(--table-border);
-}
-
-
-/* ------------------------------------------- */
-/* ★ 6. 하단 데이터 헤더 (.bottom-data-header) (2배 확대 반영) ★ */
-/* ------------------------------------------- */
-.data-table .bottom-data-header td {
-    background: var(--table-header-bg); 
-    color: var(--table-header-text); 
-    font-weight: 700;
-    height: 36px; 
-    font-size: 14px; 
-    padding: 4px 4px; 
-    width: 20%; 
-}
-
-/* ------------------------------------------- */
-/* ★ 7. 하단 데이터 행 (.bottom-data-row) (2배 확대 반영) ★ */
-/* ------------------------------------------- */
-.data-table .bottom-data-row td {
-    font-weight: 700;
-    height: 32px; 
-    font-size: 14px; 
-    padding: 4px 4px; 
-}
-.data-table .bottom-data-row .red-text {
-    color: var(--red-highlight); 
-}
-
-/* 호버 (기존 유지) */
-.data-table tr:hover td{
-    background: rgba(255,255,255,0.05);
+.download-button:hover {
+    background-color: #0056b3;
 }
