@@ -97,9 +97,9 @@ body{
 /* 표 (너비 50px 증가 반영) */
 .data-table{
     position:absolute;
-    top:95px;
+    top:100px;
     left:155px; 
-    width:730px; /* ★ 680px에서 730px로 변경 (50px 증가) */
+    width:730px; 
     border-collapse:collapse;
     font-size:8px; /* 기본 글자 크기 (최소화) */
     z-index:4;
@@ -112,7 +112,7 @@ body{
     background: var(--table-row-bg); 
     color: var(--table-row-text); 
     padding:2px 2px; /* 최소화 */
-    height:16px; /* 최소화 */
+    height:16px; /* 최소화. top-data-row에서 오버라이드 예정 */
     text-align:center;
     border-bottom:1px solid var(--table-border);
     border-right:1px solid var(--table-border);
@@ -145,20 +145,23 @@ body{
 
 
 /* ------------------------------------------- */
-/* ★ 2. 상단 데이터 헤더 (.top-data-header) (5열 균등 분할 유지 - 20%) ★ */
+/* ★ 2. 상단 데이터 헤더 (.top-data-header) (높이 축소 반영) ★ */
 /* ------------------------------------------- */
 .data-table .top-data-header td {
     background: var(--table-header-bg); 
     color: var(--table-header-text); 
     font-weight: 700;
-    height: 18px; 
-    width: 20%; /* 5개 열이 늘어난 전체 너비(730px)에 맞춰 균등하게 조정됨 */
+    height: 15px; /* ★ 18px -> 15px로 축소 */
+    width: 20%; 
 }
 
 
 /* ------------------------------------------- */
-/* ★ 3. 상단 데이터 행 (.top-data-row) ★ */
+/* ★ 3. 상단 데이터 행 (.top-data-row) (높이 축소 반영) ★ */
 /* ------------------------------------------- */
+.data-table .top-data-row td {
+    height: 15px; /* ★ 16px -> 15px로 축소 (위 아래 셀 크기 줄이기) */
+}
 .data-table .top-data-row td:nth-child(3),
 .data-table .top-data-row td:nth-child(4) {
     color: var(--red-highlight); 
@@ -167,14 +170,14 @@ body{
 
 
 /* ------------------------------------------- */
-/* ★ 4. 중간 제목 셀 (.middle-title-row) (축소 반영) ★ */
+/* ★ 4. 중간 제목 셀 (.middle-title-row) (높이 확대 반영) ★ */
 /* ------------------------------------------- */
 .data-table .middle-title-row td {
     background: var(--yellow-bg); 
     color: var(--dark-text); 
-    font-size: 10px; 
+    font-size: 12px; /* ★ 10px -> 12px로 확대 */
     font-weight: 900;
-    padding: 4px; 
+    padding: 6px 4px; /* ★ 위/아래 패딩 4px -> 6px로 확대 */
     border-bottom: 2px solid var(--table-border);
 }
 
@@ -204,7 +207,7 @@ body{
     height: 36px; 
     font-size: 14px; 
     padding: 4px 4px; 
-    width: 20%; /* 5개 열이 늘어난 전체 너비(730px)에 맞춰 균등하게 조정됨 */
+    width: 20%; 
 }
 
 /* ------------------------------------------- */
@@ -215,7 +218,6 @@ body{
     height: 32px; 
     font-size: 14px; 
     padding: 4px 4px; 
-    /* width: 20%는 상속되거나 따로 설정되지 않아도 5개 열로 균등하게 배치됩니다. */
 }
 .data-table .bottom-data-row .red-text {
     color: var(--red-highlight); 
