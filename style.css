@@ -84,8 +84,8 @@ body{
 /* 표 (오른쪽 줄을 덮기 위해 왼쪽 위치를 조정) */
 .data-table{
     position:absolute;
-    top:170px;
-    left:180px; 
+    top:100px;
+    left:100px; 
     width:680px; 
     border-collapse:collapse;
     font-size:8px; /* 기본 글자 크기 */
