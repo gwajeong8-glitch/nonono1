@@ -44,17 +44,20 @@ function downloadImage(elementId) {
 // VIP 카드 데이터 (초기값 설정)
 const vipCardData = {
     'vip1': {
-        background: 'url("https://i.imgur.com/your-vip1-image.png")', // 여기에 실제 이미지 URL 또는 경로 입력
+        // 경로 수정: 파일 이름과 확장자 (png) 사용
+        background: 'url("vip1.png")', 
         id: '아까리',
         cardNo: '1747824562'
     },
     'vip2': {
-        background: 'url("https://i.imgur.com/your-vip2-image.png")', // 여기에 실제 이미지 URL 또는 경로 입력
+        // 경로 수정: 파일 이름과 확장자 (png) 사용
+        background: 'url("vip2.png")', 
         id: '베르사체',
         cardNo: '2345678901'
     },
     'vip3': {
-        background: 'url("https://i.imgur.com/your-vip3-image.png")', // 여기에 실제 이미지 URL 또는 경로 입력
+        // 경로 수정: 파일 이름과 확장자 (png) 사용
+        background: 'url("vip3.png")', 
         id: '샤넬리아',
         cardNo: '3456789012'
     }
