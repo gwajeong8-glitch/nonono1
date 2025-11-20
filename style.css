@@ -6,27 +6,28 @@ body{
     color:white;
 }
 
-/* 래퍼 (캡처 대상 영역) */
+/* 래퍼 (캡처 대상 영역) - 카드 비율에 맞춰 높이 조정 */
 .wrap{
     width:1024px;
-    height:490px;
+    height:600px; /* 원본 카드 크기에 맞춰 높이 증가 */
     margin:0 auto;
     position:relative;
     background-color: #000;
     overflow: hidden;
-    display: flex; /* 내부 요소 정렬을 위해 추가 */
-    justify-content: center; /* 수평 중앙 정렬 */
-    align-items: center; /* 수직 중앙 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* 상단 탭 메뉴 */
+/* 상단 탭 메뉴 위치 조정 (중앙 정렬) */
 .top-menu{
     position:absolute;
-    top:50px;
-    left:190px; /* 기존 위치 유지 */
+    top:80px; /* 카드와 적당한 간격 확보 */
+    left:50%; /* 중앙 정렬 시작 */
+    transform: translateX(-50%); /* 정확히 중앙 정렬 */
     display:flex;
     gap:20px;
-    z-index:10; /* 설정 패널보다 위로 */
+    z-index:10; 
 }
 .top-menu .menu{
     background:rgba(160,160,160,0.3);
@@ -42,66 +43,96 @@ body{
     font-weight:700;
 }
 
-/* VIP 카드 디스플레이 영역 */
+/* VIP 카드 디스플레이 영역 - 원본 이미지 비율에 맞춰 크기 조정 */
 .vip-card-display{
-    width: 900px; /* 카드 이미지 크기에 맞게 조절 */
-    height: 500px; /* 카드 이미지 크기에 맞게 조절 */
+    width: 850px; /* 카드 이미지의 가로 폭 */
+    height: 480px; /* 카드 이미지의 세로 폭 (약 1.77:1 비율) */
     background-size: cover;
     background-position: center center;
     position: relative;
-    border-radius: 10px; /* 카드 모서리 둥글게 */
-    overflow: hidden; /* 배경 이미지 잘림 방지 */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* 그림자 효과 */
+    border-radius: 10px; 
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
     display: flex;
-    justify-content: flex-start; /* 텍스트는 왼쪽 정렬 */
-    align-items: flex-end; /* 텍스트는 아래쪽 정렬 */
-    padding: 20px; /* 텍스트와 하단/좌측 여백 */
-    box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 20px; 
+    box-sizing: border-box; 
 }
 
 /* VIP 카드 위에 표시될 텍스트 오버레이 */
 .vip-text-overlay{
-    position: absolute; /* 카드 이미지 위에 배치 */
-    bottom: 30px; /* 하단에서 여백 */
-    left: 400px; /* 왼쪽에서 여백, 이미지 상 ID 위치 조정 필요 */
-    color: white; /* 텍스트 색상 */
-    font-size: 20px; /* 글자 크기 */
+    position: absolute; 
+    /* bottom, left, font-size, color는 JS에서 동적으로 설정됩니다. */
     font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* 글자 그림자 */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); 
     line-height: 1.5;
-    white-space: nowrap; /* 줄바꿈 방지 */
+    white-space: nowrap; 
 }
 
 /* 편집 가능한 텍스트 스타일 */
 .vip-text-overlay span[contenteditable="true"] {
-    background: rgba(255, 255, 255, 0.1); /* 편집 시 배경색 */
+    background: rgba(255, 255, 255, 0.1); 
     padding: 2px 5px;
     border-radius: 3px;
-    min-width: 100px; /* 최소 너비 */
-    display: inline-block; /* 너비 조절 가능하게 */
-    outline: none; /* 클릭 시 아웃라인 제거 */
-    border: 1px dashed rgba(255,255,255,0.3); /* 편집임을 알리는 테두리 */
+    min-width: 100px; 
+    display: inline-block; 
+    outline: none; 
+    border: 1px dashed rgba(255,255,255,0.3); 
 }
 .vip-text-overlay span[contenteditable="true"]:focus {
     background: rgba(255, 255, 255, 0.2);
-    border-color: #ffdd66; /* 포커스 시 테두리 색상 */
+    border-color: #ffdd66; 
 }
 
-/* --- 설정 패널 관련 CSS --- */
+/* --- 설정 패널 관련 CSS (스타일 추가) --- */
 .setting-panel{
     position: fixed;
     top: 10px;
     right: 10px;
     width: 250px;
     padding: 15px;
-    background: rgba(0, 0, 0, 0.7); 
+    background: rgba(0, 0, 0, 0.8); /* 배경 진하게 */
     border: 1px solid #333;
     border-radius: 8px;
     color: white;
-    z-index: 100; 
+    z-index: 100;
     font-size: 12px;
-    backdrop-filter: blur(5px); 
-    display: none; /* VIP 카드 기능에서는 필요 없으므로 숨김 */
+    backdrop-filter: blur(5px);
+    display: block; /* 항상 보이도록 설정 */
+}
+.setting-panel h3 {
+    margin-top: 0;
+    font-size: 14px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+.setting-panel label {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+    color: #aaa;
+}
+.setting-panel input[type="number"], 
+.setting-panel input[type="text"], 
+.setting-panel input[type="color"] {
+    box-sizing: border-box;
+    padding: 5px;
+    margin-bottom: 10px;
+    background: #1e1e1e;
+    border: 1px solid #444;
+    color: #ffdd66;
+    border-radius: 3px;
+}
+.setting-panel input[type="color"] {
+    height: 30px;
+    padding: 0;
+}
+.setting-panel hr {
+    border: none;
+    border-top: 1px solid #444;
+    margin: 15px 0;
 }
 .download-button {
     width: 100%;
