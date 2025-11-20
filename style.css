@@ -33,16 +33,16 @@ body{
     overflow: hidden;
 }
 
-/* 상단 탭 (축소 반영) */
+/* 상단 탭 */
 .top-menu{
-    position:absolute; top:50px; left:200px; display:flex; gap:15px;
+    position:absolute; top:50px; left:190px; display:flex; gap:20px; /* ★ 원래대로 복구 */
     z-index:5;
 }
 .top-menu .menu{
     background:rgba(160,160,160,0.3);
-    padding:4px 8px;
-    border-radius:4px;
-    font-size:10px;
+    padding:6px 10px; /* ★ 원래대로 복구 */
+    border-radius:5px; 
+    font-size:12px; /* ★ 원래대로 복구 */
 }
 
 /* N 로고 및 NOBLESSE 텍스트 배치 (축소 반영) */
@@ -71,13 +71,14 @@ body{
     color:#ffcc66; z-index:5;
 }
 
-/* 왼쪽 메뉴 (축소 반영) */
+/* 왼쪽 메뉴 */
 .left-menu{
-    position:absolute; left:50px; top:120px; width:100px;
-    line-height:12px;
-    font-size:10px;
+    position:absolute; left:50px; top:120px; width:110px; /* ★ 원래대로 복구 */
+    line-height:14px; /* ★ 원래대로 복구 */
+    font-size:11px; /* ★ 원래대로 복구 */
     z-index:5;
 }
+
 .left-item{ padding:0 0; cursor:pointer; transition:0.15s; }
 .left-item.active{ color:#ffdd66; font-weight:700; text-shadow:0 0 6px #ffdd66; }
 
