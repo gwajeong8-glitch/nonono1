@@ -10,8 +10,6 @@
     --yellow-bg: #FFE082; /* 중간 노란색 배경 */
     --dark-text: #1A1A1A; /* 어두운 글자색 */
     --red-highlight: #FF0000; /* 빨간색 강조 글자 */
-    
-    /* 도시 선택 관련 변수가 있다면 여기에 유지되어야 합니다. (이전 작업 기준) */
 }
 
 body{
@@ -134,20 +132,21 @@ body{
 
 
 /* ------------------------------------------- */
-/* ★ 2. 상단 데이터 헤더 (.top-data-header) (6열 균등 분할 반영) ★ */
+/* ★ 2. 상단 데이터 헤더 (.top-data-header) (5열 균등 분할 반영) ★ */
 /* ------------------------------------------- */
 .data-table .top-data-header td {
     background: var(--table-header-bg); 
     color: var(--table-header-text); 
     font-weight: 700;
     height: 18px; 
-    width: 16.66%; /* 6개 열이 균등하게 1/6 너비를 갖도록 조정 */
+    width: 20%; /* ★ 5개 열이 균등하게 1/5 너비 (20%)를 갖도록 조정 */
 }
 
 
 /* ------------------------------------------- */
 /* ★ 3. 상단 데이터 행 (.top-data-row) ★ */
 /* ------------------------------------------- */
+/* 이제 열이 5개이므로, 3, 4번째 열에 색상 적용 */
 .data-table .top-data-row td:nth-child(3),
 .data-table .top-data-row td:nth-child(4) {
     color: var(--red-highlight); 
@@ -186,6 +185,7 @@ body{
 /* ------------------------------------------- */
 /* ★ 6. 하단 데이터 헤더 (.bottom-data-header) (2배 확대 반영) ★ */
 /* ------------------------------------------- */
+/* 하단 테이블은 여전히 5개 열이므로 width 20% 유지 */
 .data-table .bottom-data-header td {
     background: var(--table-header-bg); 
     color: var(--table-header-text); 
@@ -213,7 +213,3 @@ body{
 .data-table tr:hover td{
     background: rgba(255,255,255,0.05);
 }
-
-/* * 도시 선택 관련 스타일이 있었다면 이 아래에 위치합니다. 
- * 현재 HTML에 select 요소가 없으므로 해당 코드는 제외되었습니다. 
- */
