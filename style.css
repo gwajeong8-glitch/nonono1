@@ -39,44 +39,55 @@ body{
 }
 .top-menu .menu{
     background:rgba(160,160,160,0.3);
-    padding:8px 15px; border-radius:5px; font-size:14px;
+    padding:6px 10px; /* ★ 축소 */
+    border-radius:5px; 
+    font-size:12px; /* ★ 축소 */
 }
 
 /* N 로고 및 NOBLESSE 텍스트 배치 */
 .noblesse-logo {
     position: absolute; right: 28px; top: 110px; z-index: 5;
-    font-size: 14px; font-weight: 700; color: #FFD700;
+    font-size: 13px; /* ★ 축소 */
+    font-weight: 700; color: #FFD700;
 }
 .noblesse-heart {
     position: absolute; right: 25px; top: 70px; z-index: 5;
     /* 실제 이미지 파일이 있다면 여기에 background-image를 사용해야 함 */
-    width: 40px; height: 40px; background: url('heart_icon.png') no-repeat center/contain; 
+    width: 35px; /* ★ 축소 */
+    height: 35px; /* ★ 축소 */
+    background: url('heart_icon.png') no-repeat center/contain; 
 }
 
 /* 제목 / 서브 */
 .title{
-    position:absolute; top:125px; width:100%; text-align:center; font-size:28px; font-weight:700; z-index:5;
+    position:absolute; top:125px; width:100%; text-align:center; 
+    font-size:24px; /* ★ 축소 */
+    font-weight:700; z-index:5;
 }
 .subtitle{
     position:absolute; top:95px; width:100%; text-align:center; transform:translateX(-5px); 
-    font-size:14px; color:#ffcc66; z-index:5;
+    font-size:12px; /* ★ 축소 */
+    color:#ffcc66; z-index:5;
 }
 
 /* 왼쪽 메뉴 */
 .left-menu{
-    position:absolute; left:50px; top:120px; width:115px; line-height:16px; font-size:13px; z-index:5;
+    position:absolute; left:50px; top:120px; width:110px; /* ★ 축소 */
+    line-height:14px; /* ★ 축소 */
+    font-size:11px; /* ★ 축소 */
+    z-index:5;
 }
-.left-item{ padding:1px 0; cursor:pointer; transition:0.15s; }
+.left-item{ padding:0 0; cursor:pointer; transition:0.15s; }
 .left-item.active{ color:#ffdd66; font-weight:700; text-shadow:0 0 6px #ffdd66; }
 
 /* 표 (오른쪽 줄을 덮기 위해 왼쪽 위치를 조정) */
 .data-table{
     position:absolute;
     top:170px;
-    left:170px; /* ★ 수정: 왼쪽 위치 170px로 조정 (중앙 배치 목적) */
-    width:750px; /* ★ 수정: 표 전체 너비 750px로 축소 */
+    left:170px; 
+    width:750px; 
     border-collapse:collapse;
-    font-size:12px; /* ★ 수정: 전체 폰트 크기 12px로 축소 */
+    font-size:10px; /* ★ 대폭 축소 (기본 글자 크기) */
     z-index:4;
     overflow:hidden;
     box-shadow:0 2px 0 rgba(0,0,0,0.35);
@@ -84,10 +95,10 @@ body{
 
 /* ★ 테이블 셀 기본 스타일 (모든 <td>에 적용) ★ */
 .data-table td{
-    background: var(--table-row-bg); /* 기본 녹색 배경 */
-    color: var(--table-row-text); /* 기본 밝은 녹색 글자 */
-    padding:7px 6px; /* ★ 수정: 패딩 약간 축소 */
-    height:25px; 
+    background: var(--table-row-bg); 
+    color: var(--table-row-text); 
+    padding:4px 4px; /* ★ 대폭 축소 */
+    height:20px; /* ★ 대폭 축소 */
     text-align:center;
     border-bottom:1px solid var(--table-border);
     border-right:1px solid var(--table-border);
@@ -103,19 +114,19 @@ body{
 /* ★ 1. 상단 공지 통합 셀 (.top-notice-row) ★ */
 /* ------------------------------------------- */
 .data-table .top-notice-row td {
-    background: #FFD700; /* 노란색 배경 */
-    color: var(--dark-text); /* 어두운 글자색 */
+    background: #FFD700; 
+    color: var(--dark-text); 
     text-align: left;
-    padding: 3px 8px;
-    font-size: 11px;
+    padding: 2px 6px; /* ★ 축소 */
+    font-size: 9px; /* ★ 축소 */
     font-weight: 700;
-    line-height: 1.4;
+    line-height: 1.3; /* ★ 축소 */
     border-bottom: 2px solid var(--table-border);
 }
 .data-table .top-notice-mark {
-    color: var(--red-highlight); /* DAMAGE! 부분 빨간색 */
+    color: var(--red-highlight); 
     font-weight: 900;
-    margin-right: 5px;
+    margin-right: 4px; /* ★ 축소 */
 }
 
 
@@ -123,23 +134,22 @@ body{
 /* ★ 2. 상단 데이터 헤더 (.top-data-header) ★ */
 /* ------------------------------------------- */
 .data-table .top-data-header td {
-    background: var(--table-header-bg); /* 헤더 배경색 (파란색) */
-    color: var(--table-header-text); /* 헤더 글자색 (흰색) */
+    background: var(--table-header-bg); 
+    color: var(--table-header-text); 
     font-weight: 700;
-    height: 30px;
+    height: 22px; /* ★ 축소 */
 }
+/* 열 너비는 유지하여 글씨가 잘리지 않도록 합니다. */
 .data-table .top-data-header td:nth-child(2),
 .data-table .top-data-header td:nth-child(3),
 .data-table .top-data-header td:nth-child(4) {
-    width: 15%; /* 주문상태, 발송오류, 검수실패 불가 열 너비 조정 */
+    width: 15%; 
 }
-/* ★ 수정: 회원 ID, 승인 코드, 이웃 코드 열 너비를 15%로 조정하여 코드 내용이 잘 보이도록 합니다. */
 .data-table .top-data-header td:nth-child(1),
 .data-table .top-data-header td:nth-child(5),
 .data-table .top-data-header td:nth-child(6) {
     width: 15%;
 }
-/* 남은 55%는 브라우저가 자동으로 다른 열에 할당합니다. */
 
 
 /* ------------------------------------------- */
@@ -147,7 +157,7 @@ body{
 /* ------------------------------------------- */
 .data-table .top-data-row td:nth-child(3),
 .data-table .top-data-row td:nth-child(4) {
-    color: var(--red-highlight); /* '발송 오류', '검수실패 불가' 빨간색 */
+    color: var(--red-highlight); 
     font-weight: 700;
 }
 
@@ -156,11 +166,11 @@ body{
 /* ★ 4. 중간 제목 셀 (.middle-title-row) ★ */
 /* ------------------------------------------- */
 .data-table .middle-title-row td {
-    background: var(--yellow-bg); /* 노란색 배경 */
-    color: var(--dark-text); /* 어두운 글자색 */
-    font-size: 14px; /* ★ 수정: 폰트 크기 14px로 축소 */
+    background: var(--yellow-bg); 
+    color: var(--dark-text); 
+    font-size: 12px; /* ★ 축소 */
     font-weight: 900;
-    padding: 8px;
+    padding: 6px; /* ★ 축소 */
     border-bottom: 2px solid var(--table-border);
 }
 
@@ -169,13 +179,13 @@ body{
 /* ★ 5. 중간 공지사항 셀 (.middle-notice-row) ★ */
 /* ------------------------------------------- */
 .data-table .middle-notice-row td {
-    background: var(--yellow-bg); /* 노란색 배경 */
-    color: var(--dark-text); /* 어두운 글자색 */
+    background: var(--yellow-bg); 
+    color: var(--dark-text); 
     text-align: left;
-    padding: 8px 10px; /* ★ 수정: 패딩 약간 축소 */
-    font-size: 11px; /* ★ 수정: 폰트 크기 11px로 축소 */
-    line-height: 1.5;
-    white-space: normal; /* 줄바꿈 허용 */
+    padding: 6px 8px; /* ★ 축소 */
+    font-size: 10px; /* ★ 축소 */
+    line-height: 1.4; /* ★ 축소 */
+    white-space: normal; 
     border-bottom: 2px solid var(--table-border);
 }
 
@@ -184,11 +194,11 @@ body{
 /* ★ 6. 하단 데이터 헤더 (.bottom-data-header) ★ */
 /* ------------------------------------------- */
 .data-table .bottom-data-header td {
-    background: var(--table-header-bg); /* 헤더 배경색 (파란색) */
-    color: var(--table-header-text); /* 헤더 글자색 (흰색) */
+    background: var(--table-header-bg); 
+    color: var(--table-header-text); 
     font-weight: 700;
-    height: 30px;
-    width: 20%; /* 5개 열을 20%씩 분할 */
+    height: 22px; /* ★ 축소 */
+    width: 20%; 
 }
 
 /* ------------------------------------------- */
@@ -198,7 +208,7 @@ body{
     font-weight: 700;
 }
 .data-table .bottom-data-row .red-text {
-    color: var(--red-highlight); /* 빨간색 글자 강조 */
+    color: var(--red-highlight); 
 }
 
 /* 호버 (기존 유지) */
