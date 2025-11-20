@@ -73,10 +73,10 @@ body{
 .data-table{
     position:absolute;
     top:170px;
-    left:159px; /* 오른쪽 줄 제거를 위한 1px 조정 유지 */
-    width:802px;
+    left:170px; /* ★ 수정: 왼쪽 위치 170px로 조정 (중앙 배치 목적) */
+    width:750px; /* ★ 수정: 표 전체 너비 750px로 축소 */
     border-collapse:collapse;
-    font-size:13px; /* 전체 폰트 크기 조정 */
+    font-size:12px; /* ★ 수정: 전체 폰트 크기 12px로 축소 */
     z-index:4;
     overflow:hidden;
     box-shadow:0 2px 0 rgba(0,0,0,0.35);
@@ -86,8 +86,8 @@ body{
 .data-table td{
     background: var(--table-row-bg); /* 기본 녹색 배경 */
     color: var(--table-row-text); /* 기본 밝은 녹색 글자 */
-    padding:8px 8px;
-    height:25px; /* 높이 조정 */
+    padding:7px 6px; /* ★ 수정: 패딩 약간 축소 */
+    height:25px; 
     text-align:center;
     border-bottom:1px solid var(--table-border);
     border-right:1px solid var(--table-border);
@@ -130,13 +130,17 @@ body{
 }
 .data-table .top-data-header td:nth-child(2),
 .data-table .top-data-header td:nth-child(3),
-.data-table .top-data-header td:nth-child(4),
-.data-table .top-data-header td:nth-child(5) {
-    width: 15%; /* 열 너비 조정 */
+.data-table .top-data-header td:nth-child(4) {
+    width: 15%; /* 주문상태, 발송오류, 검수실패 불가 열 너비 조정 */
 }
-.data-table .top-data-header td:nth-child(1) {
-    width: 10%;
+/* ★ 수정: 회원 ID, 승인 코드, 이웃 코드 열 너비를 15%로 조정하여 코드 내용이 잘 보이도록 합니다. */
+.data-table .top-data-header td:nth-child(1),
+.data-table .top-data-header td:nth-child(5),
+.data-table .top-data-header td:nth-child(6) {
+    width: 15%;
 }
+/* 남은 55%는 브라우저가 자동으로 다른 열에 할당합니다. */
+
 
 /* ------------------------------------------- */
 /* ★ 3. 상단 데이터 행 (.top-data-row) ★ */
@@ -154,7 +158,7 @@ body{
 .data-table .middle-title-row td {
     background: var(--yellow-bg); /* 노란색 배경 */
     color: var(--dark-text); /* 어두운 글자색 */
-    font-size: 16px;
+    font-size: 14px; /* ★ 수정: 폰트 크기 14px로 축소 */
     font-weight: 900;
     padding: 8px;
     border-bottom: 2px solid var(--table-border);
@@ -168,8 +172,8 @@ body{
     background: var(--yellow-bg); /* 노란색 배경 */
     color: var(--dark-text); /* 어두운 글자색 */
     text-align: left;
-    padding: 10px 15px;
-    font-size: 12px;
+    padding: 8px 10px; /* ★ 수정: 패딩 약간 축소 */
+    font-size: 11px; /* ★ 수정: 폰트 크기 11px로 축소 */
     line-height: 1.5;
     white-space: normal; /* 줄바꿈 허용 */
     border-bottom: 2px solid var(--table-border);
