@@ -2,7 +2,7 @@
 // 이미지 다운로드 함수 (html2canvas 사용)
 // ==========================================================
 function downloadImage(elementId) {
-    const captureElement = document.getElementById(elementId); // 캡처할 요소 ID
+    const captureElement = document.getElementById(elementId); 
 
     // 로딩 표시 및 버튼 비활성화
     const button = document.querySelector('.download-button');
@@ -11,7 +11,7 @@ function downloadImage(elementId) {
     button.disabled = true;
 
     html2canvas(captureElement, {
-        scale: 2, 
+        scale: 2, /* 2배 크기로 고화질 캡처 */
         allowTaint: true,
         useCORS: true
     }).then(canvas => {
@@ -19,7 +19,7 @@ function downloadImage(elementId) {
 
         const a = document.createElement('a');
         a.href = image;
-        a.download = `${elementId}_capture.png`; // 다운로드 파일명
+        a.download = `${elementId}_capture.png`; 
         
         document.body.appendChild(a);
         a.click();
@@ -41,45 +41,101 @@ function downloadImage(elementId) {
 // VIP 카드 기능 로직
 // ==========================================================
 
-// VIP 카드 데이터 (초기값 설정)
+// VIP 카드 데이터 (스타일 정보 추가 및 확장자 .jpg로 수정)
 const vipCardData = {
     'vip1': {
-        // 경로 수정: 파일 이름과 확장자 (png) 사용
-        background: 'url("vip1.png")', 
+        background: 'url("vip1.jpg")', // .jpg로 수정
         id: '아까리',
-        cardNo: '1747824562'
+        cardNo: '1747824562',
+        style: {
+            posX: 380,
+            posY: 40,
+            fontSize: 20,
+            fontColor: '#ffffff'
+        }
     },
     'vip2': {
-        // 경로 수정: 파일 이름과 확장자 (png) 사용
-        background: 'url("vip2.png")', 
+        background: 'url("vip2.jpg")', // .jpg로 수정
         id: '베르사체',
-        cardNo: '2345678901'
+        cardNo: '2345678901',
+        style: {
+            posX: 400, // 카드 2는 다른 위치 기본값
+            posY: 50,
+            fontSize: 22,
+            fontColor: '#ffdd66' // 카드 2는 다른 색상 기본값
+        }
     },
     'vip3': {
-        // 경로 수정: 파일 이름과 확장자 (png) 사용
-        background: 'url("vip3.png")', 
+        background: 'url("vip3.jpg")', // .jpg로 수정
         id: '샤넬리아',
-        cardNo: '3456789012'
+        cardNo: '3456789012',
+        style: {
+            posX: 420,
+            posY: 60,
+            fontSize: 18,
+            fontColor: '#cccccc'
+        }
     }
 };
 
-let currentVipCard = 'vip1'; // 현재 활성화된 VIP 카드
+let currentVipCard = 'vip1'; 
+
+// 헬퍼 함수: 스타일을 적용하고 로컬 스토리지에 저장
+function applyStyle(prop, value) {
+    const overlay = document.querySelector('.vip-text-overlay');
+    if (prop === 'posX') {
+        overlay.style.left = `${value}px`;
+        localStorage.setItem(`vip_${currentVipCard}_posX`, value);
+    } else if (prop === 'posY') {
+        overlay.style.bottom = `${value}px`;
+        localStorage.setItem(`vip_${currentVipCard}_posY`, value);
+    } else if (prop === 'fontSize') {
+        overlay.style.fontSize = `${value}px`;
+        localStorage.setItem(`vip_${currentVipCard}_fontSize`, value);
+    } else if (prop === 'fontColor') {
+        overlay.style.color = value;
+        localStorage.setItem(`vip_${currentVipCard}_fontColor`, value);
+    }
+}
 
 function updateVipCardDisplay(cardId) {
     const display = document.getElementById('vip-card-display');
     const idSpan = document.getElementById('vip-id');
     const cardNoSpan = document.getElementById('vip-cardno');
-
     const data = vipCardData[cardId];
+    
+    const posXInput = document.getElementById('posX');
+    const posYInput = document.getElementById('posY');
+    const fontSizeInput = document.getElementById('fontSize');
+    const fontColorInput = document.getElementById('fontColor');
+
     if (data) {
         display.style.backgroundImage = data.background;
-        idSpan.textContent = data.id;
-        cardNoSpan.textContent = data.cardNo;
         currentVipCard = cardId;
 
-        // 로컬 스토리지에서 저장된 값 로드 (있다면)
-        idSpan.textContent = localStorage.getItem(`vip_${cardId}_id`) || data.id;
-        cardNoSpan.textContent = localStorage.getItem(`vip_${cardId}_cardNo`) || data.cardNo;
+        // 1. 텍스트 내용 로드 및 적용
+        const loadedId = localStorage.getItem(`vip_${cardId}_id`) || data.id;
+        const loadedCardNo = localStorage.getItem(`vip_${cardId}_cardNo`) || data.cardNo;
+        idSpan.textContent = loadedId;
+        cardNoSpan.textContent = loadedCardNo;
+
+        // 2. 스타일 설정 로드 (Local Storage 우선)
+        const loadedPosX = localStorage.getItem(`vip_${cardId}_posX`) || data.style.posX;
+        const loadedPosY = localStorage.getItem(`vip_${cardId}_posY`) || data.style.posY;
+        const loadedFontSize = localStorage.getItem(`vip_${cardId}_fontSize`) || data.style.fontSize;
+        const loadedFontColor = localStorage.getItem(`vip_${cardId}_fontColor`) || data.style.fontColor;
+        
+        // 3. UI 인풋에 반영
+        posXInput.value = loadedPosX;
+        posYInput.value = loadedPosY;
+        fontSizeInput.value = loadedFontSize;
+        fontColorInput.value = loadedFontColor;
+
+        // 4. CSS에 적용
+        applyStyle('posX', loadedPosX);
+        applyStyle('posY', loadedPosY);
+        applyStyle('fontSize', loadedFontSize);
+        applyStyle('fontColor', loadedFontColor);
     }
 }
 
@@ -100,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 편집 가능한 텍스트 필드 변경 시 로컬 스토리지에 저장
+    // 텍스트 내용 편집 이벤트 (로컬 스토리지에 저장)
     const idSpan = document.getElementById('vip-id');
     const cardNoSpan = document.getElementById('vip-cardno');
 
@@ -111,9 +167,18 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem(`vip_${currentVipCard}_cardNo`, e.target.textContent);
     });
 
+    // --- 새로운 스타일 컨트롤 이벤트 리스너 추가 ---
+    const posXInput = document.getElementById('posX');
+    const posYInput = document.getElementById('posY');
+    const fontSizeInput = document.getElementById('fontSize');
+    const fontColorInput = document.getElementById('fontColor');
+
+    posXInput.addEventListener('input', (e) => applyStyle('posX', e.target.value));
+    posYInput.addEventListener('input', (e) => applyStyle('posY', e.target.value));
+    fontSizeInput.addEventListener('input', (e) => applyStyle('fontSize', e.target.value));
+    fontColorInput.addEventListener('input', (e) => applyStyle('fontColor', e.target.value));
+
+
     // 초기 VIP 카드 디스플레이 설정 (첫 번째 VIP 카드)
     updateVipCardDisplay(currentVipCard);
-
-    // .setting-panel을 VIP 카드 기능에서는 숨김 (필요한 경우만 보이도록)
-    document.querySelector('.setting-panel').style.display = 'block'; // VIP 카드 기능에 다운로드 버튼이 있으므로 보이도록 설정
 });
