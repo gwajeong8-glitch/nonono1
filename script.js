@@ -1,154 +1,116 @@
+// ==========================================================
+// 이미지 다운로드 함수 (html2canvas 사용)
+// ==========================================================
+function downloadImage(elementId) {
+    const captureElement = document.getElementById(elementId); // 캡처할 요소 ID
+
+    // 로딩 표시 및 버튼 비활성화
+    const button = document.querySelector('.download-button');
+    const originalText = button.textContent;
+    button.textContent = '이미지 생성 중... 잠시만 기다려주세요.';
+    button.disabled = true;
+
+    html2canvas(captureElement, {
+        scale: 2, 
+        allowTaint: true,
+        useCORS: true
+    }).then(canvas => {
+        const image = canvas.toDataURL('image/png');
+
+        const a = document.createElement('a');
+        a.href = image;
+        a.download = `${elementId}_capture.png`; // 다운로드 파일명
+        
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        // 버튼 원래대로 복구
+        button.textContent = originalText;
+        button.disabled = false;
+
+    }).catch(error => {
+        console.error('이미지 생성 중 오류 발생:', error);
+        button.textContent = '❌ 오류 발생 (콘솔 확인)';
+        button.disabled = false;
+        alert('이미지 생성에 실패했습니다.');
+    });
+}
+
+// ==========================================================
+// VIP 카드 기능 로직
+// ==========================================================
+
+// VIP 카드 데이터 (초기값 설정)
+const vipCardData = {
+    'vip1': {
+        background: 'url("https://i.imgur.com/your-vip1-image.png")', // 여기에 실제 이미지 URL 또는 경로 입력
+        id: '아까리',
+        cardNo: '1747824562'
+    },
+    'vip2': {
+        background: 'url("https://i.imgur.com/your-vip2-image.png")', // 여기에 실제 이미지 URL 또는 경로 입력
+        id: '베르사체',
+        cardNo: '2345678901'
+    },
+    'vip3': {
+        background: 'url("https://i.imgur.com/your-vip3-image.png")', // 여기에 실제 이미지 URL 또는 경로 입력
+        id: '샤넬리아',
+        cardNo: '3456789012'
+    }
+};
+
+let currentVipCard = 'vip1'; // 현재 활성화된 VIP 카드
+
+function updateVipCardDisplay(cardId) {
+    const display = document.getElementById('vip-card-display');
+    const idSpan = document.getElementById('vip-id');
+    const cardNoSpan = document.getElementById('vip-cardno');
+
+    const data = vipCardData[cardId];
+    if (data) {
+        display.style.backgroundImage = data.background;
+        idSpan.textContent = data.id;
+        cardNoSpan.textContent = data.cardNo;
+        currentVipCard = cardId;
+
+        // 로컬 스토리지에서 저장된 값 로드 (있다면)
+        idSpan.textContent = localStorage.getItem(`vip_${cardId}_id`) || data.id;
+        cardNoSpan.textContent = localStorage.getItem(`vip_${cardId}_cardNo`) || data.cardNo;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-    // ----------------------------------------------------
-    // 1. 설정 저장 및 불러오기 로직 정의
-    // ----------------------------------------------------
+    window.downloadImage = downloadImage; 
 
-    // 헬퍼: 안전하게 CSS 변수 설정
-    function setVar(name, value) {
-        document.documentElement.style.setProperty(name, value);
-    }
-    
-    // 헬퍼: 로컬 스토리지에 설정 저장 (자동 저장)
-    function saveSetting(key, value) {
-        if (value) {
-            localStorage.setItem(key, value);
-        }
-    }
+    // 상단 VIP 메뉴 탭 클릭 이벤트
+    const vipMenus = document.querySelectorAll(".top-menu .menu");
+    vipMenus.forEach(menu => {
+        menu.addEventListener("click", (event) => {
+            // 모든 메뉴의 active 클래스 제거
+            vipMenus.forEach(m => m.classList.remove('active'));
+            // 클릭된 메뉴에 active 클래스 추가
+            event.target.classList.add('active');
 
-    // 헬퍼: 로컬 스토리지에서 설정 불러오기 및 적용
-    function loadSettings() {
-        const settings = {
-            // 일반 색상
-            '--table-header-bg': "headerBgColor",
-            '--table-header-text': "headerTextColor",
-            '--table-row-bg': "rowBgColor",
-            '--table-row-text': "rowTextColor",
-            // 특정 셀 색상
-            '--col-num-text-color': "colNumTextColor",
-            '--col-num-bg-color': "colNumBgColor",
-            '--col-select-text-color': "colSelectTextColor",
-            '--col-select-bg-color': "colSelectBgColor",
-            '--col-service-color': "colServiceColor",
-        };
-
-        // 1. 색상 설정 불러오기
-        for (const cssVar in settings) {
-            const inputId = settings[cssVar];
-            const storedValue = localStorage.getItem(inputId);
-            const inputElement = document.getElementById(inputId);
-
-            if (storedValue) {
-                setVar(cssVar, storedValue);
-                if (inputElement) {
-                    inputElement.value = storedValue;
-                }
-            }
-        }
-        
-        // 2. 제목 설정 불러오기
-        const titleElement = document.querySelector(".title");
-        const storedTitle = localStorage.getItem("titleSetting");
-        if (storedTitle && titleElement) {
-            titleElement.textContent = storedTitle;
-            const titleInput = document.getElementById("titleInput");
-            if (titleInput) {
-                titleInput.value = storedTitle;
-            }
-        }
-    }
-    
-    // 페이지 로드 시 설정 불러오기
-    loadSettings();
-
-    // ----------------------------------------------------
-    // 2. 초기화 및 이벤트 리스너 설정 (저장 로직 추가)
-    // ----------------------------------------------------
-
-    // 왼쪽 메뉴 active 토글
-    const leftItems = document.querySelectorAll(".left-item");
-    leftItems.forEach(item => {
-        item.addEventListener("click", () => {
-            document.querySelector(".left-item.active")?.classList.remove("active");
-            item.classList.add("active");
+            const cardId = event.target.dataset.card;
+            updateVipCardDisplay(cardId);
         });
     });
 
-    // 컬러 입력 요소 ID 매칭
-    const headerBg = document.getElementById("headerBgColor");
-    const headerText = document.getElementById("headerTextColor");
-    const rowBg = document.getElementById("rowBgColor");
-    const rowText = document.getElementById("rowTextColor");
-    const colNumText = document.getElementById("colNumTextColor");
-    const colNumBg = document.getElementById("colNumBgColor");
-    const colSelectText = document.getElementById("colSelectTextColor");
-    const colSelectBg = document.getElementById("colSelectBgColor");
-    const colService = document.getElementById("colServiceColor"); 
-    
-    // 제목 입력 요소 ID 매칭
-    const titleInput = document.getElementById("titleInput");
-    const titleElement = document.querySelector(".title");
+    // 편집 가능한 텍스트 필드 변경 시 로컬 스토리지에 저장
+    const idSpan = document.getElementById('vip-id');
+    const cardNoSpan = document.getElementById('vip-cardno');
 
-    // ★ 컬러 팔레트 로직 ★
-    const colorPaletteElement = document.querySelector(".color-palette");
-    const presetColors = [
-        '#FF0000', '#0000FF', '#008000', '#FFFF00', '#FFA500', 
-        '#800080', '#00FFFF', '#FFC0CB', '#FFFFFF', '#000000', 
-        '#808080', '#A52A2A', '#00FF00', '#FFD700', '#FF4500',
-        '#9932CC', '#4682B4', '#DAA520', '#2F4F4F', '#00BFFF'
-    ];
-    let activeColorInput = headerBg;
-
-    // 1. 색상 버튼 생성 및 추가
-    presetColors.forEach(color => {
-        const swatch = document.createElement('div');
-        swatch.className = 'color-swatch';
-        swatch.style.backgroundColor = color;
-        swatch.dataset.color = color;
-        
-        swatch.addEventListener('click', () => {
-            if (activeColorInput) {
-                const event = new Event('input', { bubbles: true });
-                activeColorInput.value = color; 
-                activeColorInput.dispatchEvent(event); 
-            }
-        });
-        colorPaletteElement.appendChild(swatch);
+    idSpan.addEventListener('input', (e) => {
+        localStorage.setItem(`vip_${currentVipCard}_id`, e.target.textContent);
+    });
+    cardNoSpan.addEventListener('input', (e) => {
+        localStorage.setItem(`vip_${currentVipCard}_cardNo`, e.target.textContent);
     });
 
-    // 2. 모든 컬러 입력 필드에 'focus' 이벤트 리스너 추가
-    const colorInputs = document.querySelectorAll('.color-panel input[type="color"]');
-    colorInputs.forEach(input => {
-        input.addEventListener('focus', () => {
-            activeColorInput = input;
-        });
-        input.parentElement.addEventListener('click', () => {
-            input.focus();
-        });
-    });
+    // 초기 VIP 카드 디스플레이 설정 (첫 번째 VIP 카드)
+    updateVipCardDisplay(currentVipCard);
 
-    // --- 이벤트 리스너 설정 (저장 로직 통합) ---
-    
-    // 1. 일반 테이블 색상 변경 이벤트 리스너
-    if (headerBg) headerBg.addEventListener("input", e => { setVar('--table-header-bg', e.target.value); saveSetting('headerBgColor', e.target.value); });
-    if (headerText) headerText.addEventListener("input", e => { setVar('--table-header-text', e.target.value); saveSetting('headerTextColor', e.target.value); });
-    if (rowBg) rowBg.addEventListener("input", e => { setVar('--table-row-bg', e.target.value); saveSetting('rowBgColor', e.target.value); });
-    if (rowText) rowText.addEventListener("input", e => { setVar('--table-row-text', e.target.value); saveSetting('rowTextColor', e.target.value); });
-
-    // 2. 특정 셀 색상 변경 이벤트 리스너
-    if (colNumText) colNumText.addEventListener("input", e => { setVar('--col-num-text-color', e.target.value); saveSetting('colNumTextColor', e.target.value); });
-    if (colNumBg) colNumBg.addEventListener("input", e => { setVar('--col-num-bg-color', e.target.value); saveSetting('colNumBgColor', e.target.value); });
-    if (colSelectText) colSelectText.addEventListener("input", e => { setVar('--col-select-text-color', e.target.value); saveSetting('colSelectTextColor', e.target.value); });
-    if (colSelectBg) colSelectBg.addEventListener("input", e => { setVar('--col-select-bg-color', e.target.value); saveSetting('colSelectBgColor', e.target.value); });
-    if (colService) colService.addEventListener("input", e => { setVar('--col-service-color', e.target.value); saveSetting('colServiceColor', e.target.value); });
-
-    // 3. 제목 변경 이벤트 리스너
-    if (titleInput && titleElement) {
-        titleInput.addEventListener("input", (e) => {
-            const newTitle = e.target.value || "실시간 데이터 현황";
-            titleElement.textContent = newTitle;
-            saveSetting('titleSetting', newTitle);
-        });
-    } else {
-        console.warn("제목 입력 필드 또는 제목 엘리먼트를 찾을 수 없습니다.");
-    }
+    // .setting-panel을 VIP 카드 기능에서는 숨김 (필요한 경우만 보이도록)
+    document.querySelector('.setting-panel').style.display = 'block'; // VIP 카드 기능에 다운로드 버튼이 있으므로 보이도록 설정
 });
