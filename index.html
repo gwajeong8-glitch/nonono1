@@ -1,51 +1,125 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>노블레스 통합 매니지먼트 - VIP 카드</title>
-    <link rel="stylesheet" href="style.css"> 
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<meta charset="UTF-8">
+<title>VIP CARD MAKER</title>
+
+<style>
+    body {
+        background: #111;
+        padding: 30px;
+        color: #EEE8D5;
+        font-family: sans-serif;
+        display: flex;
+        gap: 30px;
+    }
+
+    /* 카드 영역 */
+    #cardArea {
+        width: 700px;
+        height: 450px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* ID 텍스트 */
+    #idText {
+        position: absolute;
+        color: #C4B454;       /* 아이보리 */
+        font-size: 23px;
+        font-weight: bold;
+        left: 310px;           /* ← 여기 숫자만 바꾸면 위치 변경 */
+        top: 365px;           /* ← 여기 */
+    }
+
+    /* CARD NO 텍스트 */
+    #cardNoText {
+        position: absolute;
+        color: #C4B454;
+        font-size: 23px;
+        font-weight: bold;
+        left: 310px;           /* ← 여기 */
+        top: 390px;           /* ← 여기 */
+    }
+
+    #controls input,
+    #controls select,
+    #controls button {
+        margin-bottom: 10px;
+        padding: 7px;
+        width: 220px;
+    }
+
+    button {
+        background: #d4b98b;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+</style>
 </head>
+
 <body>
 
-<div class="setting-panel">
-    <h3>📝 텍스트 스타일 설정</h3>
-    
-    <label for="posX">X 위치 (px):</label>
-    <input type="number" id="posX" value="350">
-    
-    <label for="posY">Y 위치 (px):</label>
-    <input type="number" id="posY" value="30">
-    
-    <label for="fontSize">폰트 크기 (px):</label>
-    <input type="number" id="fontSize" value="20">
-    
-    <label for="fontColor">폰트 색상:</label>
-    <input type="color" id="fontColor" value="#ffffff">
-
-    <hr>
-
-    <button class="download-button" onclick="downloadImage('vip-card-display')">
-        🖼️ VIP 카드 이미지 다운로드 (PNG)
-    </button>
+<!-- 카드 배경 -->
+<div id="cardArea" style="background-image: url('img/vip1.png');">
+    <div id="idText">ID: 홍길동</div>
+    <div id="cardNoText">CARD NO: 0000000000</div>
 </div>
 
-<div class="wrap" id="capture-area"> 
+<!-- 설정 패널 -->
+<div id="controls">
 
-    <div class="top-menu">
-        <div class="menu active" data-card="vip1">VIP 1</div>
-        <div class="menu" data-card="vip2">VIP 2</div>
-        <div class="menu" data-card="vip3">VIP 3</div>
-    </div>
+    <label>VIP 선택</label><br>
+    <select id="vipSelect">
+        <option value="img/vip1.png">VIP 1</option>
+        <option value="img/vip2.png">VIP 2</option>
+        <option value="img/vip3.png">VIP 3</option>
+    </select><br>
 
-    <div class="vip-card-display" id="vip-card-display">
-        <div class="vip-text-overlay"> 
-            <div class="text-line">ID: <span id="vip-id" contenteditable="true">아까리</span></div>
-            <div class="text-line">CARD NO: <span id="vip-cardno" contenteditable="true">1747824562</span></div>
-        </div>
-    </div>
+    <label>ID</label><br>
+    <input id="idInput" type="text" value="홍길동"><br>
+
+    <label>CARD NO</label><br>
+    <input id="cardNoInput" type="text" value="0000000000"><br>
+
+    <button id="downloadBtn">PNG 다운로드</button>
 </div>
 
-<script src="script.js"></script>
+<!-- html2canvas -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<script>
+    const idText = document.getElementById("idText");
+    const cardNoText = document.getElementById("cardNoText");
+
+    /* 텍스트 입력 변경 */
+    document.getElementById("idInput").addEventListener("input", e => {
+        idText.textContent = "ID: " + e.target.value;
+    });
+
+    document.getElementById("cardNoInput").addEventListener("input", e => {
+        cardNoText.textContent = "CARD NO: " + e.target.value;
+    });
+
+    /* VIP 배경 변경 */
+    document.getElementById("vipSelect").addEventListener("change", e => {
+        document.getElementById("cardArea").style.backgroundImage = `url('${e.target.value}')`;
+    });
+
+    /* PNG 저장 */
+    document.getElementById("downloadBtn").addEventListener("click", () => {
+        html2canvas(document.getElementById("cardArea")).then(canvas => {
+            const link = document.createElement("a");
+            link.download = "vip_card.png";
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    });
+</script>
+
 </body>
 </html>
