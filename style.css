@@ -74,18 +74,26 @@ body{
     font-size:10px;
     color:#ffcc66; z-index:5;
 }
-
 /* 왼쪽 메뉴 */
 .left-menu{
-    position:absolute; left:50px; top:120px; width:110px; /* ★ 원래대로 복구 */
-    line-height:14px; /* ★ 원래대로 복구 */
-    font-size:11px; /* ★ 원래대로 복구 */
+    position:absolute;
+    left:50px;
+    top:120px;
+    width:115px;
+    line-height:16px;
+    font-size:13px;
     z-index:5;
 }
-
-.left-item{ padding:0 0; cursor:pointer; transition:0.15s; }
-.left-item.active{ color:#ffdd66; font-weight:700; text-shadow:0 0 6px #ffdd66; }
-
+.left-item{
+    padding:1px 0;
+    cursor:pointer;
+    transition:0.15s;
+}
+.left-item.active{
+    color:#ffdd66;
+    font-weight:700;
+    text-shadow:0 0 6px #ffdd66;
+}
 /* 표 (너비 50px 증가 반영) */
 .data-table{
     position:absolute;
