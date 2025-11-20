@@ -35,14 +35,18 @@ body{
 
 /* 상단 탭 */
 .top-menu{
-    position:absolute; top:50px; left:190px; display:flex; gap:20px; /* ★ 원래대로 복구 */
+    position:absolute;
+    top:50px;
+    left:190px;
+    display:flex;
+    gap:20px;
     z-index:5;
 }
 .top-menu .menu{
     background:rgba(160,160,160,0.3);
-    padding:6px 10px; /* ★ 원래대로 복구 */
-    border-radius:5px; 
-    font-size:12px; /* ★ 원래대로 복구 */
+    padding:8px 15px;
+    border-radius:5px;
+    font-size:14px;
 }
 
 /* N 로고 및 NOBLESSE 텍스트 배치 (축소 반영) */
