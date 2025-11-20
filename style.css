@@ -98,7 +98,7 @@ body{
 .data-table{
     position:absolute;
     top:100px;
-    left:160px; 
+    left:155px; 
     width:730px; /* ★ 680px에서 730px로 변경 (50px 증가) */
     border-collapse:collapse;
     font-size:8px; /* 기본 글자 크기 (최소화) */
