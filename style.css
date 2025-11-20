@@ -72,14 +72,26 @@ body{
 }
 
 /* 왼쪽 메뉴 (축소 반영) */
+/* 왼쪽 메뉴 */
 .left-menu{
-    position:absolute; left:50px; top:120px; width:100px;
-    line-height:12px;
-    font-size:10px;
+    position:absolute;
+    left:50px;
+    top:120px;
+    width:115px;
+    line-height:16px;
+    font-size:13px;
     z-index:5;
 }
-.left-item{ padding:0 0; cursor:pointer; transition:0.15s; }
-.left-item.active{ color:#ffdd66; font-weight:700; text-shadow:0 0 6px #ffdd66; }
+.left-item{
+    padding:1px 0;
+    cursor:pointer;
+    transition:0.15s;
+}
+.left-item.active{
+    color:#ffdd66;
+    font-weight:700;
+    text-shadow:0 0 6px #ffdd66;
+}
 
 /* 표 (위치 및 크기 축소 반영) */
 .data-table{
