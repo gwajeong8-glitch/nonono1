@@ -59,6 +59,12 @@
         cursor: pointer;
         font-weight: bold;
     }
+    
+    /* 저장 버튼용 스타일 추가 */
+    #saveContentBtn {
+        background: #8bd4be; /* 구분되게 색상 변경 */
+        color: #000;
+    }
 </style>
 </head>
 
@@ -86,6 +92,8 @@
     <label>CARD NO</label><br>
     <input id="cardNoInput" type="text" value="0000000000"><br>
 
+    <!-- 🔥 저장 기능 버튼 추가 -->
+    <button id="saveContentBtn">입력 내용 저장</button>
     <button id="downloadBtn">PNG 다운로드</button>
 </div>
 
@@ -95,24 +103,58 @@
 <script>
     const idText = document.getElementById("idText");
     const cardNoText = document.getElementById("cardNoText");
+    const idInput = document.getElementById("idInput");
+    const cardNoInput = document.getElementById("cardNoInput");
+    const vipSelect = document.getElementById("vipSelect");
+    const cardArea = document.getElementById("cardArea");
+
+    /* 1. 초기화: 저장된 내용이 있으면 불러오기 */
+    function loadSavedData() {
+        const savedId = localStorage.getItem('vip_id');
+        const savedNo = localStorage.getItem('vip_cardNo');
+        const savedBg = localStorage.getItem('vip_bg');
+
+        if (savedId) {
+            idInput.value = savedId;
+            idText.textContent = "ID: " + savedId;
+        }
+        if (savedNo) {
+            cardNoInput.value = savedNo;
+            cardNoText.textContent = "CARD NO: " + savedNo;
+        }
+        if (savedBg) {
+            vipSelect.value = savedBg;
+            cardArea.style.backgroundImage = `url('${savedBg}')`;
+        }
+    }
+    // 페이지 로드 시 실행
+    loadSavedData();
 
     /* 텍스트 입력 변경 */
-    document.getElementById("idInput").addEventListener("input", e => {
+    idInput.addEventListener("input", e => {
         idText.textContent = "ID: " + e.target.value;
     });
 
-    document.getElementById("cardNoInput").addEventListener("input", e => {
+    cardNoInput.addEventListener("input", e => {
         cardNoText.textContent = "CARD NO: " + e.target.value;
     });
 
     /* VIP 배경 변경 */
-    document.getElementById("vipSelect").addEventListener("change", e => {
-        document.getElementById("cardArea").style.backgroundImage = `url('${e.target.value}')`;
+    vipSelect.addEventListener("change", e => {
+        cardArea.style.backgroundImage = `url('${e.target.value}')`;
+    });
+
+    /* 🔥 내용 저장 버튼 기능 */
+    document.getElementById("saveContentBtn").addEventListener("click", () => {
+        localStorage.setItem('vip_id', idInput.value);
+        localStorage.setItem('vip_cardNo', cardNoInput.value);
+        localStorage.setItem('vip_bg', vipSelect.value);
+        alert("현재 입력된 내용이 저장되었습니다!\n다음에 다시 열면 그대로 유지됩니다.");
     });
 
     /* PNG 저장 */
     document.getElementById("downloadBtn").addEventListener("click", () => {
-        html2canvas(document.getElementById("cardArea")).then(canvas => {
+        html2canvas(cardArea).then(canvas => {
             const link = document.createElement("a");
             link.download = "vip_card.png";
             link.href = canvas.toDataURL();
