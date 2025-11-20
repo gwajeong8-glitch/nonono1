@@ -4,12 +4,27 @@
     <meta charset="UTF-8">
     <title>노블레스 통합 매니지먼트 - VIP 카드</title>
     <link rel="stylesheet" href="style.css"> 
-    
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 <body>
 
 <div class="setting-panel">
+    <h3>📝 텍스트 스타일 설정</h3>
+    
+    <label for="posX">X 위치 (px):</label>
+    <input type="number" id="posX" value="350">
+    
+    <label for="posY">Y 위치 (px):</label>
+    <input type="number" id="posY" value="30">
+    
+    <label for="fontSize">폰트 크기 (px):</label>
+    <input type="number" id="fontSize" value="20">
+    
+    <label for="fontColor">폰트 색상:</label>
+    <input type="color" id="fontColor" value="#ffffff">
+
+    <hr>
+
     <button class="download-button" onclick="downloadImage('vip-card-display')">
         🖼️ VIP 카드 이미지 다운로드 (PNG)
     </button>
@@ -24,7 +39,7 @@
     </div>
 
     <div class="vip-card-display" id="vip-card-display">
-        <div class="vip-text-overlay">
+        <div class="vip-text-overlay"> 
             <div class="text-line">ID: <span id="vip-id" contenteditable="true">아까리</span></div>
             <div class="text-line">CARD NO: <span id="vip-cardno" contenteditable="true">1747824562</span></div>
         </div>
