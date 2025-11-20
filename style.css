@@ -97,7 +97,7 @@ body{
 /* 표 (너비 50px 증가 반영) */
 .data-table{
     position:absolute;
-    top:100px;
+    top:95px;
     left:155px; 
     width:730px; /* ★ 680px에서 730px로 변경 (50px 증가) */
     border-collapse:collapse;
