@@ -97,8 +97,8 @@ body{
 /* 표 (너비 50px 증가 반영) */
 .data-table{
     position:absolute;
-    top:80px;
-    left:120px; 
+    top:90px;
+    left:140px; 
     width:730px; /* ★ 680px에서 730px로 변경 (50px 증가) */
     border-collapse:collapse;
     font-size:8px; /* 기본 글자 크기 (최소화) */
