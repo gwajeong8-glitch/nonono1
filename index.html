@@ -50,7 +50,7 @@
     #statusText {
         position: absolute;
         right: 20px; 
-        top: 150px;
+        top: 170px;
         color: #FFFFFF; /* 글자색을 흰색으로 변경 */
         font-size: 30px;
         font-weight: 900;
@@ -163,12 +163,12 @@
     function updateStatusDisplay() {
         if (isCardActive) {
             statusText.textContent = "Active";
-            statusText.style.backgroundColor = "rgba(0, 128, 0, 0.6)"; // 초록색 계열 배경
+            statusText.style.backgroundColor = "rgba(255, 215, 0, 0.7)"; // 초록색 계열 배경
             currentStatusSpan.textContent = "Active";
             currentStatusSpan.style.color = "#FFD700"; // 밝은 초록색
         } else {
             statusText.textContent = "Inactive";
-            statusText.style.backgroundColor = "rgba(128, 0, 0, 0.6)"; // 빨간색 계열 배경
+            statusText.style.backgroundColor = "rgba(128, 128, 128, 0.6)"; // 빨간색 계열 배경
             currentStatusSpan.textContent = "Inactive";
             currentStatusSpan.style.color = "#AAAAAA"; // 밝은 빨간색
         }
