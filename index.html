@@ -46,15 +46,22 @@
         top: 390px;
     }
     
-    /* 💡 Status 텍스트 (Active/Inactive) */
+    /* 💡 Status 텍스트 (Active/Inactive) - 배경 추가 및 흰색 폰트 */
     #statusText {
         position: absolute;
-        right: 30px; /* 오른쪽 상단에 위치 */
+        right: 30px; 
         top: 30px;
-        color: #D7263D; /* 기본: 빨간색 (Active) */
+        color: #FFFFFF; /* 글자색을 흰색으로 변경 */
         font-size: 30px;
         font-weight: 900;
-        text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.7); 
+        
+        /* 💡 배경 스타일 */
+        background-color: rgba(0, 128, 0, 0.6); /* JS에서 변경될 기본 배경색 (Active) */
+        padding: 8px 15px; 
+        border-radius: 8px; 
+        display: inline-block; 
+        transition: background-color 0.3s ease; /* 배경색 변경 시 애니메이션 */
     }
 
 
@@ -64,7 +71,7 @@
         margin-bottom: 10px;
         padding: 7px;
         width: 220px;
-        box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
+        box-sizing: border-box;
     }
 
     button {
@@ -89,14 +96,14 @@
     }
 
     #toggleStatusBtn {
-        width: 150px; /* 버튼 크기 조정 */
+        width: 150px; 
         background: #3498db;
         color: white;
     }
 
     #currentStatus {
         font-weight: bold;
-        color: #D7263D; /* Active 색상 */
+        /* 색상은 JS에서 동적으로 변경됩니다. */
     }
 </style>
 </head>
@@ -152,19 +159,20 @@
     const currentStatusSpan = document.getElementById("currentStatus");
     let isCardActive = true; // 기본 상태: Active
 
-    /* 💡 Status 텍스트 및 UI 업데이트 함수 */
+    /* 💡 Status 텍스트 및 UI 업데이트 함수 (배경색 설정 추가) */
     function updateStatusDisplay() {
         if (isCardActive) {
             statusText.textContent = "Active";
-            statusText.style.color = "#D7263D"; // 빨간색
+            statusText.style.backgroundColor = "rgba(0, 128, 0, 0.6)"; // 초록색 계열 배경
             currentStatusSpan.textContent = "Active";
-            currentStatusSpan.style.color = "#D7263D";
+            currentStatusSpan.style.color = "#00FF00"; // 밝은 초록색
         } else {
             statusText.textContent = "Inactive";
-            statusText.style.color = "#495057"; // 회색
+            statusText.style.backgroundColor = "rgba(128, 0, 0, 0.6)"; // 빨간색 계열 배경
             currentStatusSpan.textContent = "Inactive";
-            currentStatusSpan.style.color = "#495057";
+            currentStatusSpan.style.color = "#FF0000"; // 밝은 빨간색
         }
+        // statusText.style.color는 CSS에서 #FFFFFF로 고정됩니다.
     }
 
     /* 1. 초기화: 저장된 내용이 있으면 불러오기 */
@@ -189,9 +197,9 @@
         
         // 💡 Status 상태 적용
         if (savedStatus !== null) {
-            isCardActive = (savedStatus === 'true'); // 저장된 상태로 업데이트
+            isCardActive = (savedStatus === 'true'); 
         }
-        updateStatusDisplay(); // 상태를 화면에 반영
+        updateStatusDisplay(); // 상태를 화면에 반영 (배경색 포함)
     }
     
     // 페이지 로드 시 실행
@@ -203,7 +211,6 @@
     });
 
     cardNoInput.addEventListener("input", e => {
-        // 최대 10자리 제한 (HTML input 속성으로도 설정했지만 JS로도 확인)
         e.target.value = e.target.value.substring(0, 10);
         cardNoText.textContent = "CARD NO: " + e.target.value;
     });
@@ -216,7 +223,7 @@
     /* 💡 Status 토글 버튼 기능 */
     toggleStatusBtn.addEventListener("click", () => {
         isCardActive = !isCardActive; // 상태 반전
-        updateStatusDisplay(); // 화면 업데이트
+        updateStatusDisplay(); // 화면 업데이트 (배경색 변경)
     });
 
     /* 🔥 내용 저장 버튼 기능 */
