@@ -23,16 +23,17 @@
         border-radius: 10px;
         position: relative;
         overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     }
 
     /* ID 텍스트 */
     #idText {
         position: absolute;
-        color: #FFFDD0;       /* 아이보리 */
+        color: #FFFDD0;        /* 아이보리 */
         font-size: 23px;
         font-weight: bold;
-        left: 310px;           /* ← 여기 숫자만 바꾸면 위치 변경 */
-        top: 365px;           /* ← 여기 */
+        left: 310px;
+        top: 365px;
     }
 
     /* CARD NO 텍스트 */
@@ -41,9 +42,21 @@
         color: #FFFDD0;
         font-size: 23px;
         font-weight: bold;
-        left: 310px;           /* ← 여기 */
-        top: 390px;           /* ← 여기 */
+        left: 310px;
+        top: 390px;
     }
+    
+    /* 💡 Status 텍스트 (Active/Inactive) */
+    #statusText {
+        position: absolute;
+        right: 30px; /* 오른쪽 상단에 위치 */
+        top: 30px;
+        color: #D7263D; /* 기본: 빨간색 (Active) */
+        font-size: 30px;
+        font-weight: 900;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
+
 
     #controls input,
     #controls select,
@@ -51,6 +64,7 @@
         margin-bottom: 10px;
         padding: 7px;
         width: 220px;
+        box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
     }
 
     button {
@@ -60,44 +74,68 @@
         font-weight: bold;
     }
     
-    /* 저장 버튼용 스타일 추가 */
+    /* 저장 버튼용 스타일 */
     #saveContentBtn {
-        background: #8bd4be; /* 구분되게 색상 변경 */
+        background: #8bd4be;
         color: #000;
+    }
+
+    /* Status 컨트롤 레이아웃 */
+    .status-control {
+        display: flex; 
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    #toggleStatusBtn {
+        width: 150px; /* 버튼 크기 조정 */
+        background: #3498db;
+        color: white;
+    }
+
+    #currentStatus {
+        font-weight: bold;
+        color: #D7263D; /* Active 색상 */
     }
 </style>
 </head>
 
 <body>
 
-<!-- 카드 배경 -->
 <div id="cardArea" style="background-image: url('vip1.png');">
     <div id="idText">ID: 홍길동</div>
     <div id="cardNoText">CARD NO: 0000000000</div>
+    <div id="statusText">Active</div>
 </div>
 
-<!-- 설정 패널 -->
 <div id="controls">
 
-    <label>VIP 선택</label><br>
+    <h2>카드 설정 ⚙️</h2>
+
+    <label>VIP 배경 선택</label><br>
     <select id="vipSelect">
         <option value="vip1.png">VIP 1</option>
         <option value="vip2.png">VIP 2</option>
         <option value="vip3.png">VIP 3</option>
     </select><br>
 
-    <label>ID</label><br>
+    <label>ID 입력</label><br>
     <input id="idInput" type="text" value="홍길동"><br>
 
-    <label>CARD NO</label><br>
-    <input id="cardNoInput" type="text" value="0000000000"><br>
+    <label>CARD NO 입력</label><br>
+    <input id="cardNoInput" type="text" value="0000000000" maxlength="10"><br>
 
-    <!-- 🔥 저장 기능 버튼 추가 -->
-    <button id="saveContentBtn">입력 내용 저장</button>
+    <label>카드 상태 (Status)</label><br>
+    <div class="status-control">
+        <button id="toggleStatusBtn">Toggle Status</button>
+        <span id="currentStatus">Active</span>
+    </div>
+
+    <button id="saveContentBtn">입력 내용 저장 (Local)</button>
     <button id="downloadBtn">PNG 다운로드</button>
 </div>
 
-<!-- html2canvas -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <script>
@@ -107,12 +145,34 @@
     const cardNoInput = document.getElementById("cardNoInput");
     const vipSelect = document.getElementById("vipSelect");
     const cardArea = document.getElementById("cardArea");
+    
+    // 💡 Status 관련 변수
+    const statusText = document.getElementById("statusText");
+    const toggleStatusBtn = document.getElementById("toggleStatusBtn");
+    const currentStatusSpan = document.getElementById("currentStatus");
+    let isCardActive = true; // 기본 상태: Active
+
+    /* 💡 Status 텍스트 및 UI 업데이트 함수 */
+    function updateStatusDisplay() {
+        if (isCardActive) {
+            statusText.textContent = "Active";
+            statusText.style.color = "#D7263D"; // 빨간색
+            currentStatusSpan.textContent = "Active";
+            currentStatusSpan.style.color = "#D7263D";
+        } else {
+            statusText.textContent = "Inactive";
+            statusText.style.color = "#495057"; // 회색
+            currentStatusSpan.textContent = "Inactive";
+            currentStatusSpan.style.color = "#495057";
+        }
+    }
 
     /* 1. 초기화: 저장된 내용이 있으면 불러오기 */
     function loadSavedData() {
         const savedId = localStorage.getItem('vip_id');
         const savedNo = localStorage.getItem('vip_cardNo');
         const savedBg = localStorage.getItem('vip_bg');
+        const savedStatus = localStorage.getItem('vip_status');
 
         if (savedId) {
             idInput.value = savedId;
@@ -126,16 +186,25 @@
             vipSelect.value = savedBg;
             cardArea.style.backgroundImage = `url('${savedBg}')`;
         }
+        
+        // 💡 Status 상태 적용
+        if (savedStatus !== null) {
+            isCardActive = (savedStatus === 'true'); // 저장된 상태로 업데이트
+        }
+        updateStatusDisplay(); // 상태를 화면에 반영
     }
+    
     // 페이지 로드 시 실행
     loadSavedData();
 
-    /* 텍스트 입력 변경 */
+    /* 텍스트 입력 변경 (실시간 업데이트) */
     idInput.addEventListener("input", e => {
         idText.textContent = "ID: " + e.target.value;
     });
 
     cardNoInput.addEventListener("input", e => {
+        // 최대 10자리 제한 (HTML input 속성으로도 설정했지만 JS로도 확인)
+        e.target.value = e.target.value.substring(0, 10);
         cardNoText.textContent = "CARD NO: " + e.target.value;
     });
 
@@ -144,11 +213,18 @@
         cardArea.style.backgroundImage = `url('${e.target.value}')`;
     });
 
+    /* 💡 Status 토글 버튼 기능 */
+    toggleStatusBtn.addEventListener("click", () => {
+        isCardActive = !isCardActive; // 상태 반전
+        updateStatusDisplay(); // 화면 업데이트
+    });
+
     /* 🔥 내용 저장 버튼 기능 */
     document.getElementById("saveContentBtn").addEventListener("click", () => {
         localStorage.setItem('vip_id', idInput.value);
         localStorage.setItem('vip_cardNo', cardNoInput.value);
         localStorage.setItem('vip_bg', vipSelect.value);
+        localStorage.setItem('vip_status', isCardActive); // Status 상태 저장
         alert("현재 입력된 내용이 저장되었습니다!\n다음에 다시 열면 그대로 유지됩니다.");
     });
 
